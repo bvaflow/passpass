@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img">
+<title>Bluetooth — PassPass</title>
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#11151c"/><stop offset="1" stop-color="#0a0c10"/></linearGradient></defs>
+<rect width="1200" height="630" fill="url(#g)"/>
+<rect x="1" y="1" width="1198" height="628" fill="none" stroke="#232b38" stroke-width="2"/>
+<circle cx="600" cy="320" r="16" fill="#4ade80"/><circle cx="600" cy="320" r="55" fill="none" stroke="#22d3ee" stroke-width="3" opacity="0.65"/><circle cx="600" cy="320" r="100" fill="none" stroke="#22d3ee" stroke-width="3" opacity="0.51"/><circle cx="600" cy="320" r="145" fill="none" stroke="#22d3ee" stroke-width="3" opacity="0.37"/><circle cx="600" cy="320" r="190" fill="none" stroke="#22d3ee" stroke-width="3" opacity="0.23"/><path d="M470 190 L730 450 M730 190 L470 450" stroke="#fbbf24" stroke-width="4" opacity=".55" stroke-linecap="round"/>
+<text x="80" y="545" fill="#e8ecf3" font-family="Inter,Helvetica,Arial,sans-serif" font-size="46" font-weight="700">Bluetooth</text>
+<text x="80" y="588" fill="#9aa6b8" font-family="Inter,Helvetica,Arial,sans-serif" font-size="26">Le maillon faible assumé</text>
+<text x="1120" y="80" fill="#4ade80" font-family="ui-monospace,Menlo,monospace" font-size="24" text-anchor="end" letter-spacing="3">PASSPASS</text>
+</svg>

@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Comparatif : PassPass face à 1Password, Bitwarden, YubiKey et Mooltipass</title>
+<meta name="description" content="Comparatif détaillé d'un gestionnaire de mots de passe matériel face aux logiciels (1Password, Bitwarden, Dashlane, Proton Pass, KeePassXC) et aux boîtiers (YubiKey Bio, OnlyKey, Mooltipass) : sécurité, usage, coût sur 10 ans.">
+<link rel="canonical" href="https://passpass.store/comparatif.html">
+<meta name="keywords" content="comparatif gestionnaire mots de passe, PassPass vs 1Password, alternative Bitwarden, YubiKey Bio comparatif, OnlyKey, Mooltipass, prix gestionnaire mot de passe 2026, coût abonnement mot de passe">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="author" content="PassPass">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PassPass">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:url" content="https://passpass.store/comparatif.html">
+<meta property="og:title" content="Comparatif : PassPass face à 1Password, Bitwarden, YubiKey et Mooltipass">
+<meta property="og:description" content="Comparatif détaillé d'un gestionnaire de mots de passe matériel face aux logiciels (1Password, Bitwarden, Dashlane, Proton Pass, KeePassXC) et aux boîtiers (YubiKey Bio, OnlyKey, Mooltipass) : sécurité, usage, coût sur 10 ans.">
+<meta property="og:image" content="https://passpass.store/img/gestionnaire-mot-de-passe-sans-abonnement-paiement-unique.svg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Comparatif : PassPass face à 1Password, Bitwarden, YubiKey et Mooltipass">
+<meta name="twitter:description" content="Comparatif détaillé d'un gestionnaire de mots de passe matériel face aux logiciels (1Password, Bitwarden, Dashlane, Proton Pass, KeePassXC) et aux boîtiers (YubiKey Bio, OnlyKey, Mooltipass) : sécurité, usage, coût sur 10 ans.">
+<meta name="twitter:image" content="https://passpass.store/img/gestionnaire-mot-de-passe-sans-abonnement-paiement-unique.svg">
+<link rel="alternate" type="application/rss+xml" title="Journal de bord PassPass" href="https://passpass.store/blog.html">
+<link rel="stylesheet" href="styles.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "Accueil",
+   "item": "https://passpass.store/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "Comparatif",
+   "item": "https://passpass.store/comparatif.html"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a href="index.html" class="logo"><span class="logo-mark">P</span> PassPass</a>
+    <nav class="nav-links">
+      <a href="index.html#produit">Produit</a>
+      <a href="index.html#specs">Caractéristiques</a>
+      <a href="index.html#import">Import</a>
+      <a href="comparatif.html">Comparatif</a>
+      <a href="index.html#faq">FAQ</a>
+      <div class="lang">
+        <a class="lang-current" href="en/index.html">🌐 FR ▾</a>
+        <div class="lang-menu">
+          <a href="en/index.html">English</a>
+          <a class="active">Français</a>
+          <a href="de/index.html">Deutsch</a>
+          <a href="es/index.html">Español</a>
+          <a href="it/index.html">Italiano</a>
+          <a href="pt/index.html">Português</a>
+          <a href="id/index.html">Bahasa Indonesia</a>
+          <a href="tr/index.html">Türkçe</a>
+          <a href="vi/index.html">Tiếng Việt</a>
+          <a href="ru/index.html">Русский</a>
+          <a href="ja/index.html">日本語</a>
+          <a href="zh/index.html">简体中文</a>
+          <a href="zh-tw/index.html">繁體中文</a>
+          <a href="th/index.html">ไทย</a>
+          <a href="ar/index.html">العربية</a>
+        </div>
+      </div>
+      <a href="index.html#precommande" class="btn">Réserver</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ================= INTRO ================= -->
+<section class="page-hero">
+  <div class="wrap">
+    <div class="crumb"><a href="index.html">Accueil</a> › Comparatif</div>
+    <h1>PassPass face au reste du marché</h1>
+    <p class="lede">
+      Deux familles de produits se disputent la protection de vos mots de passe, et elles ne résolvent
+      pas le même problème. Les <strong>gestionnaires logiciels</strong> sont commodes et synchronisés,
+      mais s'exécutent sur la machine même dont on cherche à se méfier. Les <strong>boîtiers matériels</strong>
+      isolent les secrets, mais aucun ne réunit à ce jour écran, empreinte et coffre complet.
+    </p>
+    <p class="lede">
+      Ce comparatif est établi à partir des documentations publiques des constructeurs.
+      Il contient aussi une section sur les cas où PassPass n'est <em>pas</em> le bon choix —
+      un comparatif où le produit maison gagne partout ne vous serait d'aucune utilité.
+    </p>
+  </div>
+</section>
+
+<!-- ================= LOGICIELS ================= -->
+<section id="logiciels">
+  <div class="wrap">
+    <h2>Face aux gestionnaires logiciels</h2>
+    <p class="lede" style="margin-bottom:26px">
+      1Password, Bitwarden, Dashlane, Proton Pass, KeePassXC. Excellents outils, modèle de sécurité différent.
+    </p>
+    <div class="legend">
+      <span><b class="y">✓</b> présent</span>
+      <span><b class="p">~</b> partiel ou conditionnel</span>
+      <span><b class="n">✕</b> absent</span>
+    </div>
+
+    <div class="table-scroll">
+      <table class="cmp">
+        <thead>
+          <tr>
+            <th>Critère</th>
+            <th class="me">PassPass</th>
+            <th>1Password</th>
+            <th>Bitwarden</th>
+            <th>Dashlane</th>
+            <th>Proton Pass</th>
+            <th>KeePassXC</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="grp"><td colspan="7">Modèle de sécurité</td></tr>
+          <tr>
+            <td>Secrets hors de portée d'un OS compromis</td>
+            <td class="me y">✓</td>
+            <td class="n">✕</td><td class="n">✕</td><td class="n">✕</td><td class="n">✕</td><td class="n">✕</td>
+          </tr>
+          <tr>
+            <td>Résiste à un enregistreur de frappe</td>
+            <td class="me y">✓<small>saisie hors clavier</small></td>
+            <td class="p">~<small>si remplissage auto</small></td><td class="p">~</td><td class="p">~</td><td class="p">~</td><td class="p">~</td>
+          </tr>
+          <tr>
+            <td>Coffre inaccessible si le PC est infecté</td>
+            <td class="me y">✓</td>
+            <td class="n">✕<small>déverrouillé en mémoire</small></td><td class="n">✕</td><td class="n">✕</td><td class="n">✕</td><td class="n">✕</td>
+          </tr>
+          <tr>
+            <td>Aucun coffre stocké chez un tiers</td>
+            <td class="me y">✓</td>
+            <td class="n">✕</td><td class="p">~<small>auto-hébergement possible</small></td><td class="n">✕</td><td class="n">✕</td><td class="y">✓</td>
+          </tr>
+          <tr>
+            <td>Validation physique par appareil séparé</td>
+            <td class="me y">✓</td>
+            <td class="n">✕</td><td class="n">✕</td><td class="n">✕</td><td class="n">✕</td><td class="n">✕</td>
+          </tr>
+          <tr>
+            <td>Affichage du domaine hors du navigateur</td>
+            <td class="me y">✓</td>
+            <td class="n">✕</td><td class="n">✕</td><td class="n">✕</td><td class="n">✕</td><td class="n">✕</td>
+          </tr>
+
+          <tr class="grp"><td colspan="7">Usage au quotidien</td></tr>
+          <tr>
+            <td>Synchronisation multi-appareils</td>
+            <td class="p">~<small>via le boîtier ou pack duo</small></td>
+            <td class="y">✓</td><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td><td class="p">~</td>
+          </tr>
+          <tr>
+            <td>Remplissage automatique navigateur</td>
+            <td class="p">~<small>saisie déclenchée par le doigt</small></td>
+            <td class="y">✓</td><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td><td class="p">~</td>
+          </tr>
+          <tr>
+            <td>Partage familial ou en équipe</td>
+            <td class="n">✕<small>hors périmètre</small></td>
+            <td class="y">✓</td><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td><td class="n">✕</td>
+          </tr>
+          <tr>
+            <td>Nombre d'entrées</td>
+            <td class="me">2 000</td>
+            <td>illimité</td><td>illimité</td><td>illimité</td><td>illimité</td><td>illimité</td>
+          </tr>
+          <tr>
+            <td>Alertes de fuite de données</td>
+            <td class="n">✕</td>
+            <td class="y">✓</td><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td><td class="n">✕</td>
+          </tr>
+          <tr>
+            <td>Fonctionne sans le boîtier sur soi</td>
+            <td class="n">✕</td>
+            <td class="y">✓</td><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td>
+          </tr>
+
+          <tr class="grp"><td colspan="7">Coût &amp; ouverture</td></tr>
+          <tr>
+            <td>Modèle économique</td>
+            <td class="me">achat unique<small>dès 249 €</small></td>
+            <td>abonnement<small>47,88 $/an — ≈ 44 €</small></td>
+            <td>gratuit ou Premium<small>19,80 $/an — ≈ 18 €</small></td>
+            <td>abonnement<small>59,88 $/an — ≈ 55 €</small></td>
+            <td>gratuit ou Plus<small>35,88 $/an — ≈ 33 €</small></td>
+            <td>gratuit<small>logiciel libre</small></td>
+          </tr>
+          <tr>
+            <td>Code source ouvert</td>
+            <td class="me p">~<small>firmware oui, matériel non</small></td>
+            <td class="n">✕</td><td class="y">✓</td><td class="n">✕</td><td class="y">✓</td><td class="y">✓</td>
+          </tr>
+          <tr>
+            <td>Import depuis un concurrent</td>
+            <td class="me y">✓<small>15+ formats &amp; CSV</small></td>
+            <td class="y">✓</td><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td><td class="y">✓</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="small muted" style="margin-top:16px">
+      Tarifs relevés en juillet 2026 sur les offres individuelles annoncées par les éditeurs, convertis
+      depuis le dollar à titre indicatif ; les montants en euros et la TVA varient selon la région.
+      <strong>2026 a été une année de hausses</strong> : 1Password est passé de 35,88 à 47,88 $/an
+      le 27 mars 2026 (+33 %), et Bitwarden Premium de 9,99 à 19,80 $/an en janvier 2026,
+      sa première augmentation en dix ans. Dashlane a supprimé son offre gratuite en septembre 2025.
+    </p>
+  </div>
+</section>
+
+<!-- ================= MATÉRIELS ================= -->
+<section id="materiels">
+  <div class="wrap">
+    <h2>Face aux boîtiers matériels</h2>
+    <p class="lede" style="margin-bottom:26px">
+      Clés de sécurité et gestionnaires matériels — uniquement des appareils qui gèrent réellement
+      des identifiants. Chacun est très bon dans son domaine ; aucun ne couvre l'ensemble.
+    </p>
+    <div class="legend">
+      <span><b class="y">✓</b> présent</span>
+      <span><b class="p">~</b> partiel ou conditionnel</span>
+      <span><b class="n">✕</b> absent</span>
+    </div>
+
+    <div class="table-scroll">
+      <table class="cmp">
+        <thead>
+          <tr>
+            <th>Critère</th><th class="me">PassPass</th><th>YubiKey Bio</th><th>OnlyKey</th><th>Mooltipass</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="grp"><td colspan="5">Fonction principale</td></tr>
+          <tr>
+            <td>Vocation d'origine</td><td class="me">mots de passe</td><td>authentification</td><td>mots de passe</td><td>mots de passe</td>
+          </tr>
+          <tr>
+            <td>Coffre de mots de passe complet</td><td class="me y">✓</td><td class="n">✕</td><td class="y">✓</td><td class="y">✓</td>
+          </tr>
+          <tr>
+            <td>Saisit identifiant + mot de passe</td><td class="me y">✓</td><td class="n">✕</td><td class="y">✓</td><td class="y">✓</td>
+          </tr>
+          <tr>
+            <td>Clé FIDO2 / passkeys</td><td class="me y">✓</td><td class="y">✓</td><td class="y">✓</td><td class="p">~</td>
+          </tr>
+          <tr>
+            <td>Codes TOTP</td><td class="me y">✓</td><td class="n">✕</td><td class="y">✓</td><td class="y">✓</td>
+          </tr>
+
+          <tr class="grp"><td colspan="5">Interface</td></tr>
+          <tr>
+            <td>Écran</td><td class="me y">✓<small>Memory LCD 64 couleurs, permanent</small></td><td class="n">✕</td><td class="n">✕</td><td class="y">✓<small>OLED monochrome</small></td>
+          </tr>
+          <tr>
+            <td>Lecteur d'empreinte</td><td class="me y">✓</td><td class="y">✓</td><td class="p">~<small>selon modèle</small></td><td class="n">✕<small>carte + PIN</small></td>
+          </tr>
+          <tr>
+            <td>Affiche le domaine avant l'envoi</td><td class="me y">✓</td><td class="n">✕</td><td class="n">✕</td><td class="y">✓</td>
+          </tr>
+
+          <tr class="grp"><td colspan="5">Fabrication</td></tr>
+          <tr>
+            <td>Matériau</td><td class="me">aluminium anodisé<small>titane sur One Ti</small></td><td>plastique</td><td>plastique</td><td>aluminium</td>
+          </tr>
+          <tr>
+            <td>Étanchéité certifiée</td><td class="me y">✓<small>IP67</small></td><td class="p">~<small>IPX4</small></td><td class="n">✕</td><td class="n">✕</td>
+          </tr>
+          <tr>
+            <td>Élément sécurisé dédié</td><td class="me y">✓</td><td class="y">✓</td><td class="p">~</td><td class="y">✓</td>
+          </tr>
+          <tr>
+            <td>Firmware ouvert</td><td class="me y">✓</td><td class="n">✕</td><td class="y">✓</td><td class="y">✓</td>
+          </tr>
+
+          <tr class="grp"><td colspan="5">Prix</td></tr>
+          <tr>
+            <td>Prix indicatif</td><td class="me">249–299 €</td><td>98 $<small>≈ 90 €</small></td><td>60 $<small>≈ 55 €</small></td><td>91 £ HT<small>≈ 105 €</small></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="small muted" style="margin-top:16px">
+      Ce tableau ne retient que des appareils conçus pour les identifiants. Les portefeuilles de
+      cryptomonnaies à écran, souvent cités comme points de comparaison, en sont volontairement absents :
+      ils sécurisent des clés de signature, pas des mots de passe, et ne peuvent ni stocker ni saisir
+      vos identifiants. Les mettre dans le même tableau reviendrait à comparer un coffre-fort à un trousseau.
+      Prix relevés en juillet 2026 ; les montants convertis depuis le dollar ou la livre sont indicatifs.
+    </p>
+  </div>
+</section>
+
+<!-- ================= MENACES ================= -->
+<section id="menaces">
+  <div class="wrap">
+    <h2>Ce que chaque famille protège réellement</h2>
+    <p class="lede" style="margin-bottom:36px">
+      Un tableau de fonctionnalités ne dit pas grand-chose. La vraie question est : contre quelle
+      attaque êtes-vous couvert ?
+    </p>
+
+    <div class="threat">
+      <div class="tcard">
+        <h3>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8"/><path d="M12 17v4"/><path d="m9 8 3 3-3 3"/></svg>
+          Ordinateur infecté
+        </h3>
+        <div class="trow"><span>Gestionnaire logiciel</span><span class="n">Coffre lisible en mémoire</span></div>
+        <div class="trow"><span>Clé de sécurité</span><span class="y">Clés protégées</span></div>
+        <div class="trow"><span>PassPass</span><span class="y">Coffre hors d'atteinte</span></div>
+      </div>
+
+      <div class="tcard">
+        <h3>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s8-4 8-10V5.5L12 2.5 4 5.5V11c0 6 8 10 8 10z"/><path d="M9.5 12.5 11 14l3.5-3.5"/></svg>
+          Site de phishing
+        </h3>
+        <div class="trow"><span>Gestionnaire logiciel</span><span class="p">Refuse de remplir</span></div>
+        <div class="trow"><span>Clé FIDO2</span><span class="y">Protection native</span></div>
+        <div class="trow"><span>PassPass</span><span class="y">Domaine affiché + FIDO2</span></div>
+      </div>
+
+      <div class="tcard">
+        <h3>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 10h-1V7a5 5 0 0 0-10 0v3H6a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7a2 2 0 0 0-2-2z"/></svg>
+          Fuite chez l'éditeur
+        </h3>
+        <div class="trow"><span>Gestionnaire cloud</span><span class="p">Coffre chiffré exfiltré</span></div>
+        <div class="trow"><span>Clé de sécurité</span><span class="y">Rien à voler</span></div>
+        <div class="trow"><span>PassPass</span><span class="y">Aucun coffre chez nous</span></div>
+      </div>
+
+      <div class="tcard">
+        <h3>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/><path d="m17 3 4 4"/><path d="m21 3-4 4"/></svg>
+          Vol de l'appareil
+        </h3>
+        <div class="trow"><span>Gestionnaire logiciel</span><span class="y">Protégé par le mot de passe maître</span></div>
+        <div class="trow"><span>Clé de sécurité</span><span class="p">Second facteur perdu</span></div>
+        <div class="trow"><span>PassPass</span><span class="y">Chiffré, empreinte requise</span></div>
+      </div>
+
+      <div class="tcard">
+        <h3>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg>
+          Perte du seul exemplaire
+        </h3>
+        <div class="trow"><span>Gestionnaire cloud</span><span class="y">Restauration immédiate</span></div>
+        <div class="trow"><span>Clé de sécurité</span><span class="n">Accès perdu sans double</span></div>
+        <div class="trow"><span>PassPass</span><span class="p">Carte de récupération requise</span></div>
+      </div>
+
+      <div class="tcard">
+        <h3>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5 20 6.5v5.2c0 4.6-3.2 8.4-8 9.8-4.8-1.4-8-5.2-8-9.8V6.5z"/><path d="M12 9v4"/><path d="M12 16h.01"/></svg>
+          Contrainte physique
+        </h3>
+        <div class="trow"><span>Gestionnaire logiciel</span><span class="n">Mot de passe extorqué</span></div>
+        <div class="trow"><span>Clé de sécurité</span><span class="n">Doigt ou clé pris</span></div>
+        <div class="trow"><span>PassPass</span><span class="n">Aucune protection</span></div>
+      </div>
+    </div>
+
+    <p class="small muted" style="margin-top:26px">
+      Aucun produit de cette page, PassPass compris, ne protège contre quelqu'un qui vous contraint
+      physiquement à déverrouiller. Se méfier de tout vendeur qui prétendrait le contraire.
+    </p>
+  </div>
+</section>
+
+<!-- ================= COÛT TOTAL ================= -->
+<section id="cout">
+  <div class="wrap">
+    <h2>Coût sur cinq ans</h2>
+    <p class="lede" style="margin-bottom:32px">
+      Un achat unique face à des abonnements, pour un usage individuel.
+    </p>
+    <div class="tco">
+      <div class="tco-item me">
+        <div class="nm">PassPass One</div>
+        <div class="amt">dès 249 €</div>
+        <div class="sub">achat unique</div>
+      </div>
+      <div class="tco-item">
+        <div class="nm">Dashlane Premium</div>
+        <div class="amt">≈ 275 €</div>
+        <div class="sub">55 €/an, sans fin</div>
+      </div>
+      <div class="tco-item">
+        <div class="nm">1Password</div>
+        <div class="amt">≈ 220 €</div>
+        <div class="sub">44 €/an, sans fin</div>
+      </div>
+      <div class="tco-item">
+        <div class="nm">Proton Pass Plus</div>
+        <div class="amt">≈ 165 €</div>
+        <div class="sub">33 €/an, sans fin</div>
+      </div>
+      <div class="tco-item">
+        <div class="nm">Bitwarden Premium</div>
+        <div class="amt">≈ 90 €</div>
+        <div class="sub">18 €/an — ou gratuit</div>
+      </div>
+      <div class="tco-item">
+        <div class="nm">KeePassXC</div>
+        <div class="amt">0 €</div>
+        <div class="sub">libre et gratuit</div>
+      </div>
+    </div>
+    <p class="small muted" style="margin-top:22px">
+      Sur cinq ans, PassPass revient moins cher que 1Password et Dashlane — et l'écart se creuse ensuite,
+      puisqu'un abonnement ne s'arrête jamais. Deux réserves, en toute honnêteté : ces tarifs ont
+      augmenté en 2026 et rien ne dit qu'ils resteront stables, dans un sens comme dans l'autre ;
+      et sur le seul critère du prix, KeePassXC et Bitwarden restent imbattables. L'écart que vous
+      payez avec PassPass n'achète pas des fonctionnalités, il achète une isolation matérielle —
+      cela n'a de valeur que si cette menace vous concerne.
+    </p>
+  </div>
+</section>
+
+<!-- ================= VERDICT ================= -->
+<section id="verdict">
+  <div class="wrap">
+    <h2>Le choix honnête</h2>
+    <div class="verdict">
+      <div class="vbox good">
+        <h3>PassPass est fait pour vous si…</h3>
+        <ul>
+          <li>Vous vous connectez régulièrement depuis des machines dont vous ne maîtrisez pas l'état.</li>
+          <li>Votre modèle de menace inclut un logiciel espion sur votre propre poste.</li>
+          <li>Vous refusez que votre coffre, même chiffré, dorme chez un prestataire.</li>
+          <li>Vous voulez voir de vos yeux à quel domaine vous envoyez un secret.</li>
+          <li>Vous protégez des accès dont la compromission coûterait bien plus que 249 €.</li>
+        </ul>
+      </div>
+      <div class="vbox bad">
+        <h3>Restez sur un gestionnaire logiciel si…</h3>
+        <ul>
+          <li>Vous avez besoin d'un partage familial ou en équipe : PassPass ne le fait pas.</li>
+          <li>Vous vous connectez surtout depuis un téléphone, en mobilité permanente.</li>
+          <li>Vous risquez d'oublier régulièrement le boîtier — sans lui, aucun accès.</li>
+          <li>Le budget est le critère décisif : KeePassXC est gratuit et sérieux.</li>
+          <li>Vous voulez les alertes de fuite et l'audit de coffre intégrés.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="disclosure">
+      <h3>Une précision qui nous engage</h3>
+      <p>
+        PassPass et un gestionnaire logiciel ne s'excluent pas. Beaucoup d'utilisateurs auront intérêt à
+        garder leur gestionnaire actuel pour les dizaines de comptes sans enjeu, et à confier au boîtier
+        la poignée d'accès qui comptent vraiment : messagerie principale, banque, administration système,
+        portefeuilles. C'est l'usage que nous recommandons, même s'il vend moins bien qu'un remplacement complet.
+      </p>
+    </div>
+
+    <div style="text-align:center;margin-top:44px">
+      <a href="index.html#precommande" class="btn">Réserver un PassPass</a>
+      <p class="small muted" style="margin-top:14px">
+        Sans engagement · Aucun paiement aujourd'hui · Aucune date de livraison annoncée avant lancement de la production
+      </p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-in">
+    <div>© <span id="year"></span> PassPass — Projet en développement.</div>
+    <div>
+      <a href="index.html">Accueil</a> ·
+      <a href="index.html#precommande">Réserver</a> ·
+      <a href="blog.html">Journal de bord</a> ·
+      <a href="index.html#faq">FAQ</a> ·
+      <a href="legal.html">Informations légales</a> ·
+      <a href="en/index.html">🇬🇧 English</a> ·
+      <a href="mailto:contact@exemple.fr">contact@exemple.fr</a>
+    </div>
+  </div>
+  <div class="wrap foot-extra">
+    <div class="foot-logos">
+      <span>Campagne de précommandes bientôt sur</span>
+      <a href="index.html#precommande" title="Kickstarter"><img src="img/logos/kickstarter.svg" alt="" height="16">Kickstarter</a>
+      <a href="index.html#precommande" title="Ulule"><img src="img/logos/ulule.svg" alt="" height="16">Ulule</a>
+      <a href="index.html#precommande" title="Indiegogo"><img src="img/logos/indiegogo.svg" alt="Indiegogo" height="14"></a>
+      <a href="index.html#precommande" title="Crowd Supply"><img src="img/logos/crowdsupply.svg" alt="Crowd Supply" height="14"></a>
+    </div>
+    <span>Au journal de bord : <a href="blog.html#phishing">l'écran anti-phishing</a> · <a href="blog.html#element-securise">l'élément sécurisé ouvert</a> · <a href="blog.html#biometrie">ce que protège l'empreinte</a> · <a href="blog.html#recuperation">récupération sans porte dérobée</a></span>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>

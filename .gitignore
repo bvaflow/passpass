@@ -1,0 +1,6 @@
+# Confidentiel — conservé en local uniquement, jamais poussé
+hardware/
+docs/
+firmware/
+package.json
+*.bundle

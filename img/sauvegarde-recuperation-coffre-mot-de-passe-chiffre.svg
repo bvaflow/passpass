@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img">
+<title>Récupération — PassPass</title>
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+<stop offset="0" stop-color="#11151c"/><stop offset="1" stop-color="#0a0c10"/></linearGradient></defs>
+<rect width="1200" height="630" fill="url(#g)"/>
+<rect x="1" y="1" width="1198" height="628" fill="none" stroke="#232b38" stroke-width="2"/>
+<circle cx="520" cy="320" r="62" fill="none" stroke="#4ade80" stroke-width="4"/><path d="M582 320 h175" stroke="#4ade80" stroke-width="4" stroke-linecap="round"/><path d="M710 320 v52 M660 320 v38" stroke="#22d3ee" stroke-width="4" stroke-linecap="round"/>
+<text x="80" y="545" fill="#e8ecf3" font-family="Inter,Helvetica,Arial,sans-serif" font-size="46" font-weight="700">Récupération</text>
+<text x="80" y="588" fill="#9aa6b8" font-family="Inter,Helvetica,Arial,sans-serif" font-size="26">Sans porte dérobée</text>
+<text x="1120" y="80" fill="#4ade80" font-family="ui-monospace,Menlo,monospace" font-size="24" text-anchor="end" letter-spacing="3">PASSPASS</text>
+</svg>

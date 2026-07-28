@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PassPass — Hardware-Passwortmanager mit Display und Fingerabdrucksensor</title>
+<meta name="description" content="PassPass ist ein eigenständiger Hardware-Passwortmanager: gefrästes Aluminium, IP67, Always-on-Display, Fingerabdruckabgleich im Gerät und zwingende physische Bestätigung. Passwörter, Passkeys (FIDO2) und TOTP. Einmalkauf, kein Abo.">
+<link rel="canonical" href="https://passpass.store/de/">
+<link rel="alternate" hreflang="en" href="https://passpass.store/en/">
+<link rel="alternate" hreflang="fr" href="https://passpass.store/">
+<link rel="alternate" hreflang="de" href="https://passpass.store/de/">
+<link rel="alternate" hreflang="es" href="https://passpass.store/es/">
+<link rel="alternate" hreflang="it" href="https://passpass.store/it/">
+<link rel="alternate" hreflang="pt" href="https://passpass.store/pt/">
+<link rel="alternate" hreflang="id" href="https://passpass.store/id/">
+<link rel="alternate" hreflang="tr" href="https://passpass.store/tr/">
+<link rel="alternate" hreflang="vi" href="https://passpass.store/vi/">
+<link rel="alternate" hreflang="ru" href="https://passpass.store/ru/">
+<link rel="alternate" hreflang="ja" href="https://passpass.store/ja/">
+<link rel="alternate" hreflang="zh-Hans" href="https://passpass.store/zh/">
+<link rel="alternate" hreflang="zh-Hant" href="https://passpass.store/zh-tw/">
+<link rel="alternate" hreflang="th" href="https://passpass.store/th/">
+<link rel="alternate" hreflang="ar" href="https://passpass.store/ar/">
+<link rel="alternate" hreflang="x-default" href="https://passpass.store/">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+<canvas id="matrix" class="matrix-bg" aria-hidden="true"></canvas>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a href="index.html" class="logo"><span class="logo-mark">P</span> PassPass</a>
+    <nav class="nav-links">
+      <a href="#product">Produkt</a>
+      <a href="#specs">Technik</a>
+      <a href="#pricing">Preise</a>
+      <a href="#faq">FAQ</a>
+      <div class="lang">
+        <a class="lang-current" href="../index.html">🌐 DE ▾</a>
+        <div class="lang-menu">
+          <a href="../en/index.html">English</a>
+          <a href="../index.html">Français</a>
+          <a class="active">Deutsch</a>
+          <a href="../es/index.html">Español</a>
+          <a href="../it/index.html">Italiano</a>
+          <a href="../pt/index.html">Português</a>
+          <a href="../id/index.html">Bahasa Indonesia</a>
+          <a href="../tr/index.html">Türkçe</a>
+          <a href="../vi/index.html">Tiếng Việt</a>
+          <a href="../ru/index.html">Русский</a>
+          <a href="../ja/index.html">日本語</a>
+          <a href="../zh/index.html">简体中文</a>
+          <a href="../zh-tw/index.html">繁體中文</a>
+          <a href="../th/index.html">ไทย</a>
+          <a href="../ar/index.html">العربية</a>
+        </div>
+      </div>
+      <a href="#reserve" class="btn">Reservieren</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+
+    <span class="pill"><span class="dot"></span> In Entwicklung — kostenlose Reservierung, keine Zahlung</span>
+    <h1>Ihre Passwörter verlassen nie Ihre Tasche.</h1>
+    <p class="lede">
+      PassPass ist ein eigenständiger Tresor im gefrästen Aluminiumgehäuse: ein Always-on-Display
+      zeigt die echte Domain, bevor irgendetwas gesendet wird, der Fingerabdruck wird im Gerät
+      abgeglichen, und keine Malware kann den physischen Knopf drücken. Passwörter, Passkeys
+      (FIDO2) und TOTP — ohne Konto, ohne Cloud, ohne Abo.
+    </p>
+    <div class="hero-cta">
+      <a href="#reserve" class="btn">Jetzt reservieren — ohne Zahlung</a>
+      <a href="#pricing" class="btn ghost">Preise ansehen</a>
+    </div>
+    <p class="hero-note">Einmalkauf · funktioniert mit Windows, macOS, Linux, Android, iOS · Open-Source-Firmware</p>
+    </div>
+
+    <div>
+      <div class="device-container">
+        <div class="device-aura"></div>
+        
+        <!-- Le boîtier aluminium PassPass -->
+        <div class="device">
+          <div class="device-screws">
+            <div class="screw-row"><span class="screw"></span><span class="screw"></span></div>
+            <div class="screw-row"><span class="screw"></span><span class="screw"></span></div>
+          </div>
+
+          <div class="device-top-trim">
+            <span>A-6001 ALUMINIUM</span>
+            <span class="mic-hole"><span class="mic-dot"></span> MIC 🎙️</span>
+          </div>
+
+          <!-- Écran OLED tactile interactif -->
+          <div class="screen" id="proto-screen">
+            <div class="screen-top">
+              <div class="status-left"><span class="status-dot" id="os-dot"></span><span id="os-name">PassPass OS</span></div>
+              <div class="status-right"><span>100% 🔋</span><span>⚡ BT</span></div>
+            </div>
+
+            <!-- VUE 1 : MY VAULT (Le 2x2 Grid de la Photo 4) -->
+            <div class="os-view active" id="view-vault">
+              <div class="pixel-title">My Vault</div>
+              <div class="pixel-sub">31 passwords secured</div>
+              <div class="vault-grid">
+                <div class="vault-card card-passwords" onclick="openSubView('passwords')">
+                  <div class="vault-icon-circle">🔒</div>
+                  <span class="vault-card-label">Passwords</span>
+                  <div class="vault-card-line"></div>
+                </div>
+                <div class="vault-card card-add" onclick="openSubView('add')">
+                  <div class="vault-icon-circle">＋</div>
+                  <span class="vault-card-label">Add New</span>
+                  <div class="vault-card-line"></div>
+                </div>
+                <div class="vault-card card-fav" onclick="openSubView('favorites')">
+                  <div class="vault-icon-circle">❤️</div>
+                  <span class="vault-card-label">Favorites</span>
+                  <div class="vault-card-line"></div>
+                </div>
+                <div class="vault-card card-settings" onclick="openSubView('settings')">
+                  <div class="vault-icon-circle">⚙️</div>
+                  <span class="vault-card-label">Settings</span>
+                  <div class="vault-card-line"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- VUE 2 : BLUETOOTH REQUEST (Photo 2) -->
+            <div class="os-view bt-req-view" id="view-request">
+              <div class="bt-title">BLUETOOTH<br>REQUEST</div>
+              <div class="bt-desc">A device requests permission to type a password.</div>
+              <div class="bt-device-box">
+                <div>Site: <span>github.com</span></div>
+                <div>Account: <span>florian@example.com</span></div>
+                <div>Device: <span>MacBook Pro (00:FE:28)</span></div>
+              </div>
+              <div class="bt-btn-group">
+                <button class="btn-proto-accept" onclick="triggerBiometricAuth()">✓ ACCEPT (FINGERPRINT)</button>
+                <button class="btn-proto-reject" onclick="switchProtoView('vault')">✗ REJECT</button>
+              </div>
+            </div>
+
+            <!-- VUE 3 : VERROUILLÉ (Photo 3) -->
+            <div class="os-view lock-view-box" id="view-lock">
+              <div class="lock-circle">🔒</div>
+              <div class="pixel-title" style="font-size:2rem;margin-top:6px">PassPass One</div>
+              <div class="lock-sub">▸ TYPE PIN OR TOUCH SENSOR TO UNLOCK</div>
+            </div>
+
+            <!-- VUE 4 : SOUS-ÉCRAN DYNAMIQUE -->
+            <div class="os-view" id="view-sub">
+              <div class="sub-header">
+                <button class="btn-back" onclick="switchProtoView('vault')">◄ BACK</button>
+                <span id="sub-title-text" style="color:var(--accent-2);font-weight:600;font-size:0.82rem">Passwords (31)</span>
+              </div>
+              <div class="proto-list" id="sub-list-content">
+                <!-- Rempli en JS -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Lecteur biométrique au bas du boîtier -->
+          <div class="sensor-area">
+            <div class="sensor" id="sensor" role="button" tabindex="0" aria-label="Simulate fingerprint validation">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 2a9 9 0 0 0-9 9v3"/><path d="M21 14v-3a9 9 0 0 0-4.5-7.8"/>
+                <path d="M7 14v-3a5 5 0 0 1 10 0v3a12 12 0 0 1-1.2 5.2"/>
+                <path d="M12 11v4a9 9 0 0 1-1.4 4.8"/><path d="M6.5 18.5A8 8 0 0 0 8 14"/>
+              </svg>
+            </div>
+            <div class="sensor-label" id="sensor-label">⚡ biometric sensor — click here</div>
+          </div>
+        </div>
+
+        <!-- Câble USB-C tressé relié -->
+        <div class="usb-cable-wrapper">
+          <div class="usb-plug"><div class="usb-led"></div></div>
+          <div class="usb-wire"></div>
+        </div>
+
+        <!-- Sélecteur de mode interactif pour tester les écrans du prototype -->
+        <div class="demo-controls-bar">
+          <div class="demo-label">🎮 Explore the live prototype:</div>
+          <div class="demo-tabs">
+            <button class="demo-tab active" id="tab-vault" onclick="switchProtoView('vault')">🏠 My Vault</button>
+            <button class="demo-tab" id="tab-request" onclick="switchProtoView('request')">📡 Bluetooth Request</button>
+            <button class="demo-tab" id="tab-lock" onclick="switchProtoView('lock')">🔒 Lock screen</button>
+            <button class="demo-tab" id="tab-settings" onclick="openSubView('settings')">⚙️ Hardware specs</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="product">
+  <div class="wrap">
+    <h2>Was es sonst nirgends gibt</h2>
+    <div class="grid g3">
+      <div class="card">
+        <div class="ic">🖥️</div>
+        <h3>Ein Verifizierungsdisplay</h3>
+        <p>Die anfragende Domain erscheint auf dem eigenen Always-on-Display des Geräts — einem Bildschirm, den kein Angreifer kontrolliert. Phishing endet genau hier.</p>
+      </div>
+      <div class="card">
+        <div class="ic">👆</div>
+        <h3>Fingerabdruck im Gerät</h3>
+        <p>Der Abgleich erfolgt im Sensormodul. Ihr Fingerabdruck verlässt die Hardware nie.</p>
+      </div>
+      <div class="card">
+        <div class="ic">✋</div>
+        <h3>Zwingende physische Bestätigung</h3>
+        <p>Nichts wird getippt, signiert oder freigegeben ohne Knopfdruck bei angezeigter Anfrage. Ein infizierter Rechner kann Ihren Tresor nicht leeren.</p>
+      </div>
+      <div class="card">
+        <div class="ic">🔌</div>
+        <h3>Funktioniert überall</h3>
+        <p>Für Ihren Rechner ist es eine Tastatur (USB-C oder Bluetooth) und ein FIDO2-Sicherheitsschlüssel (USB + NFC). Kein Treiber, keine App, kein Konto.</p>
+      </div>
+      <div class="card">
+        <div class="ic">☁️</div>
+        <h3>Null Cloud, standardmäßig</h3>
+        <p>2.000 Einträge, AES-256-GCM-verschlüsselt, im Gerät gespeichert. Kein Server von uns kann gehackt werden — wir haben keinen.</p>
+      </div>
+      <div class="card">
+        <div class="ic">📖</div>
+        <h3>Auditierbare Firmware</h3>
+        <p>Open Source, reproduzierbare Builds, Attestierung im Gerät. Vertrauen wird verifiziert, nicht erbeten.</p>
+      </div>
+    </div>
+    <h2 style="margin-top:44px">Vier Sekunden, vier Schritte</h2>
+    <p>Sie landen auf einer Login-Seite → das Gerät zeigt die Anfrage und die echte Domain → Sie legen den Finger auf → das Passwort wird getippt. Das ist das ganze Produkt.</p>
+  </div>
+</section>
+
+<section id="specs">
+  <div class="wrap">
+    <h2>Technische Daten</h2>
+    <ul>
+      <li><strong>Gehäuse:</strong> gefrästes Aluminium, hartanodisiert · IP67 · 72 × 42 × 9 mm (Titan Grade 5 bei der limitierten One-Ti-Edition)</li>
+      <li><strong>Display:</strong> Always-on-Memory-LCD, bei Sonnenlicht ablesbar</li>
+      <li><strong>Biometrie:</strong> kapazitiver Fingerabdrucksensor, Abgleich im Modul, Backup-PIN mit Hardware-Versuchszähler</li>
+      <li><strong>Sicherheit:</strong> dediziertes Secure Element (offene, auditierbare Architektur), AES-256-GCM-Tresor, Secure Boot mit signierter Firmware</li>
+      <li><strong>Kapazität:</strong> 2.000 Einträge · Passwörter, Passkeys FIDO2/WebAuthn, TOTP, HID-Tastatureingabe</li>
+      <li><strong>Konnektivität:</strong> USB-C · Bluetooth LE 5.3 (standardmäßig aus) · NFC</li>
+      <li><strong>Akku:</strong> wochenlange Laufzeit pro Ladung</li>
+      <li><strong>Wiederherstellung:</strong> verschlüsseltes Backup, entsperrt durch eine vom Gerät erzeugte 12-Wörter-Karte <em>plus</em> eine Passphrase, die nur Sie kennen — konstruktionsbedingt ohne Hintertür</li>
+    </ul>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="wrap">
+    <h2 style="text-align:center">Einmal zahlen. Das war's.</h2>
+    <p class="lede" style="text-align:center;margin:0 auto 40px">
+      Kein Abo, keine Verlängerungen, nichts schaltet sich ab, wenn Sie aufhören zu zahlen.
+      Die Early-Bird-Preise unten gelten für die erste Produktionsserie.
+    </p>
+
+    <h3 class="tiers-title">PassPass One — eloxiertes Aluminium</h3>
+    <p class="tiers-sub">Das Standardgehäuse: Always-on-Display, Fingerabdruck, IP67.</p>
+    <div class="tiers">
+      <div class="tier">
+        <span class="tag">EINMALZAHLUNG</span>
+        <img class="tier-img" src="../img/offre-passpass-one-aluminium.svg" alt="PassPass One in anodized aluminum" width="800" height="500" loading="lazy" decoding="async">
+        <h3>PassPass One</h3>
+        <div class="price">€249<s>€349</s><span class="off">−29%</span></div>
+        <p class="small muted">einmalig · inkl. MwSt. für die EU, zzgl. Versand<br>
+          <span class="ref">Early Bird — erste 200 Reservierungen, danach 299 € · Ladenpreis: 349 €</span></p>
+        <ul>
+          <li>Eloxiertes Aluminiumgehäuse, Always-on-Display, IP67</li>
+          <li>Geflochtenes USB-C-Kabel · Wiederherstellungskarte</li>
+          <li>Import-Tool für alle Formate</li>
+          <li>Firmware-Updates auf Lebenszeit</li>
+          <li>2 Jahre Garantie, kein Abo</li>
+        </ul>
+        <a href="#reserve" class="btn ghost wide" style="text-align:center">Reservieren</a>
+      </div>
+      <div class="tier hl">
+        <span class="tag">AM BELIEBTESTEN</span>
+        <img class="tier-img" src="../img/offre-bundle-classique-pochette-cuir-plaque-acier.svg" alt="Bundle: device, leather pouch and steel recovery plate" width="800" height="500" loading="lazy" decoding="async">
+        <h3>One + Etui &amp; Platte</h3>
+        <div class="price">€279<s>€389</s><span class="off">−28%</span></div>
+        <p class="small muted">einmalig · inkl. MwSt. für die EU, zzgl. Versand<br>
+          <span class="ref">Early Bird — erste 150 Bundles, danach 329 € · Ladenpreis: 389 €</span></p>
+        <ul>
+          <li>Kompletter PassPass One</li>
+          <li>Leder-Etui</li>
+          <li>Stahlplatte — Ihre 12 Wörter graviert, feuer- und wasserfest</li>
+          <li>Geflochtenes USB-C-Kabel · Wiederherstellungskarte</li>
+          <li>2 Jahre Garantie, Updates auf Lebenszeit</li>
+        </ul>
+        <a href="#reserve" class="btn wide" style="text-align:center">Bundle reservieren</a>
+      </div>
+      <div class="tier">
+        <span class="tag">EINMALZAHLUNG</span>
+        <img class="tier-img" src="../img/offre-pack-duo-deux-boitiers.svg" alt="Duo pack: two devices and steel recovery plate" width="800" height="500" loading="lazy" decoding="async">
+        <h3>Duo-Pack + Platte</h3>
+        <div class="price">€449<s>€649</s><span class="off">−31%</span></div>
+        <p class="small muted">einmalig · zwei Geräte, eines primär, eines als Backup<br>
+          <span class="ref">Early Bird — erste 100 Packs, danach 549 € · Ladenpreis: 649 €</span></p>
+        <ul>
+          <li>Zwei PassPass-One-Geräte</li>
+          <li>Verschlüsselte Synchronisation zwischen beiden</li>
+          <li>Stahlplatte — Ihre 12 Wörter graviert, feuer- und wasserfest</li>
+          <li>Zwei USB-C-Kabel</li>
+          <li>2 Jahre Garantie, Updates auf Lebenszeit</li>
+        </ul>
+        <a href="#reserve" class="btn ghost wide" style="text-align:center">Pack reservieren</a>
+      </div>
+    </div>
+
+    <h3 class="tiers-title">PassPass One Ti — limitierte Titan-Edition</h3>
+    <p class="tiers-sub">Titan Grade 5, Saphirglas, nummerierte Serie · identische Elektronik.</p>
+    <div class="tiers">
+      <div class="tier">
+        <span class="tag">LIMITIERTE EDITION</span>
+        <img class="tier-img" src="../img/offre-passpass-one-ti-titane-saphir.svg" alt="PassPass One Ti, limited edition in titanium grade 5" width="800" height="500" loading="lazy" decoding="async">
+        <h3>One Ti</h3>
+        <div class="price">€349<s>€449</s><span class="off">−22%</span></div>
+        <p class="small muted">einmalig · inkl. MwSt. für die EU, zzgl. Versand<br>
+          <span class="ref">Early Bird — erste 100 Stück, danach 399 € · Ladenpreis: 449 €</span></p>
+        <ul>
+          <li>Titan Grade 5, aus dem Vollen gefräst</li>
+          <li>Saphirglas · nummerierte Serie</li>
+          <li>Identische Elektronik und Sicherheit</li>
+          <li>Geflochtenes USB-C-Kabel · Wiederherstellungskarte</li>
+          <li>2 Jahre Garantie, Updates auf Lebenszeit</li>
+        </ul>
+        <a href="#reserve" class="btn ghost wide" style="text-align:center">Ti reservieren</a>
+      </div>
+      <div class="tier hl">
+        <span class="tag">LIMITIERTE EDITION</span>
+        <img class="tier-img" src="../img/offre-bundle-ti-pochette-plaque.svg" alt="One Ti bundle: titanium device, leather pouch, steel plate" width="800" height="500" loading="lazy" decoding="async">
+        <h3>One Ti + Etui &amp; Platte</h3>
+        <div class="price">€379<s>€489</s><span class="off">−22%</span></div>
+        <p class="small muted">einmalig · inkl. MwSt. für die EU, zzgl. Versand<br>
+          <span class="ref">Early Bird — erste 75 Bundles, danach 429 € · Ladenpreis: 489 €</span></p>
+        <ul>
+          <li>Kompletter One Ti (Titan + Saphir)</li>
+          <li>Leder-Etui</li>
+          <li>Stahlplatte — Ihre 12 Wörter graviert, feuer- und wasserfest</li>
+          <li>Geflochtenes USB-C-Kabel · Wiederherstellungskarte</li>
+          <li>2 Jahre Garantie, Updates auf Lebenszeit</li>
+        </ul>
+        <a href="#reserve" class="btn wide" style="text-align:center">Ti-Bundle reservieren</a>
+      </div>
+      <div class="tier">
+        <span class="tag">LIMITIERTE EDITION</span>
+        <img class="tier-img" src="../img/offre-pack-duo-ti-titane.svg" alt="Ti duo pack: two titanium devices and steel plate" width="800" height="500" loading="lazy" decoding="async">
+        <h3>Duo-Pack Ti + Platte</h3>
+        <div class="price">€629<s>€899</s><span class="off">−30%</span></div>
+        <p class="small muted">einmalig · zwei Titan-Geräte<br>
+          <span class="ref">Early Bird — erste 50 Packs, danach 719 € · Ladenpreis: 899 €</span></p>
+        <ul>
+          <li>Zwei One-Ti-Geräte (Titan + Saphir)</li>
+          <li>Verschlüsselte Synchronisation zwischen beiden</li>
+          <li>Stahlplatte — Ihre 12 Wörter graviert, feuer- und wasserfest</li>
+          <li>Zwei USB-C-Kabel</li>
+          <li>2 Jahre Garantie, Updates auf Lebenszeit</li>
+        </ul>
+        <a href="#reserve" class="btn ghost wide" style="text-align:center">Ti-Pack reservieren</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap" style="max-width:860px">
+    <h2>Häufige Fragen</h2>
+
+    <details>
+      <summary>Was, wenn ich das Gerät verliere?</summary>
+      <p>Der Tresor ist verschlüsselt und ohne Ihren Fingerabdruck unbrauchbar. Sie stellen auf einem
+    neuen Gerät aus Ihrem verschlüsselten Backup wieder her — entsperrt durch die mitgelieferte
+    12-Wörter-Karte <em>plus</em> Ihre persönliche Passphrase. Ohne beides kann niemand — auch
+    wir nicht — Ihre Daten lesen.</p>
+    </details>
+
+    <details>
+      <summary>Was ist die Passphrase — und was, wenn ich sie vergesse?</summary>
+      <p>Die Passphrase ist ein langes Passwort, das Sie bei der Ersteinrichtung wählen und sich merken.
+    Sie ergänzt die vom Gerät erzeugte 12-Wörter-Karte: Die Karte ist, was Sie <em>haben</em>, die
+    Passphrase, was Sie <em>wissen</em> — beides ist für die Wiederherstellung nötig, eine
+    gestohlene Karte allein ist wertlos. Der Kompromiss ist gewollt: Vergessen Sie die Passphrase,
+    wird Ihr Backup dauerhaft unlesbar — es gibt keinen Umweg, weder bei uns noch anderswo. Wählen
+    Sie eine lange, aber merkbare Phrase (das Gerät lässt sie Sie bei der Einrichtung bestätigen)
+    und bewahren Sie sie nie am selben Ort wie die Karte auf.</p>
+    </details>
+
+    <details>
+      <summary>Wird mein Fingerabdruck irgendwohin gesendet?</summary>
+      <p>Nein. Der Abgleich erfolgt im Sensormodul. Der Fingerabdruck verlässt den Chip nie, und es
+    gibt keinen Server, an den er gesendet werden könnte.</p>
+    </details>
+
+    <details>
+      <summary>Braucht es eine App oder ein Abo?</summary>
+      <p>Nein. Das Gerät agiert als Tastatur und FIDO2-Schlüssel — es funktioniert an jedem Rechner
+    oder Telefon ohne Software. Eine kostenlose Begleit-App gibt es nur für den Komfort:
+    Offline-Import, Backup, Updates. Sie zahlen einmal; verschwänden wir morgen, liefe Ihr
+    Gerät weiter.</p>
+    </details>
+
+    <details>
+      <summary>Wann wird geliefert?</summary>
+      <p>PassPass wird als Vorbestellung verkauft: Die Produktion startet nach Ende des
+    Vorbestellfensters, geliefert wird erst nach Fertigung und Test. Genannte Zeitpläne sind
+    Schätzungen nach bestem Wissen und werden öffentlich aktualisiert. Die Reservierung heute
+    ist kostenlos und ohne Zahlung.</p>
+    </details>
+  </div>
+</section>
+
+<section id="reserve">
+  <div class="wrap">
+    <h2 style="text-align:center">Reservieren Sie Ihren PassPass</h2>
+    <p class="lede" style="text-align:center;margin:0 auto 36px">
+      Keine Zahlung jetzt. Wir schreiben Ihnen, sobald die Produktion bestätigt ist.
+    </p>
+    <div class="form-box">
+      <form id="preorder" novalidate>
+        <label for="email">E-Mail-Adresse</label>
+        <input type="email" id="email" name="email" placeholder="sie@beispiel.de" autocomplete="email" required>
+        <label for="pack">Gewünschte Option</label>
+        <select id="pack" name="pack">
+          <option value="one">PassPass One — €249</option>
+          <option value="one-bundle">One + Etui &amp; Platte — €279</option>
+          <option value="duo">Duo-Pack + Platte — €449</option>
+          <option value="ti">One Ti (limited) — €349</option>
+          <option value="ti-bundle">One Ti + Etui &amp; Platte — €379</option>
+          <option value="ti-duo">Duo-Pack Ti + Platte — €629</option>
+          <option value="undecided">Noch unentschieden</option>
+        </select>
+        <div class="check">
+          <input type="checkbox" id="consent" required>
+          <label for="consent">Ich bin einverstanden, zu dieser Reservierung kontaktiert zu werden. Meine Adresse wird nur
+          dafür verwendet — nie verkauft, nie weitergegeben.</label>
+        </div>
+        <button type="submit" class="btn wide">Reservierung bestätigen</button>
+        <div class="msg" id="formMsg" role="status" aria-live="polite"></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-in">
+    <div>© <span id="year"></span> PassPass — Produkt in Entwicklung.</div>
+    <div>
+      <a href="#reserve">Reservieren</a> ·
+      <a href="../comparatif.html">Vergleich (FR)</a> ·
+      <a href="../blog.html">Entwicklungstagebuch (FR)</a> ·
+      <a href="../legal.html">Rechtliches (FR)</a> ·
+      <a href="../index.html">🇫🇷 Français</a>
+    </div>
+  </div>
+  <div class="wrap foot-extra">
+    <div class="foot-logos">
+      <span>Vorbestellkampagne bald auf</span>
+      <a href="#reserve" title="Kickstarter"><img src="../img/logos/kickstarter.svg" alt="" height="16">Kickstarter</a>
+      <a href="#reserve" title="Ulule"><img src="../img/logos/ulule.svg" alt="" height="16">Ulule</a>
+      <a href="#reserve" title="Indiegogo"><img src="../img/logos/indiegogo.svg" alt="Indiegogo" height="14"></a>
+      <a href="#reserve" title="Crowd Supply"><img src="../img/logos/crowdsupply.svg" alt="Crowd Supply" height="14"></a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  (function(){
+    const form = document.getElementById('preorder');
+    const msg  = document.getElementById('formMsg');
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      const email   = document.getElementById('email').value.trim();
+      const consent = document.getElementById('consent').checked;
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+        msg.className = 'msg err';
+        msg.textContent = 'Bitte geben Sie eine gültige E-Mail-Adresse ein.';
+        return;
+      }
+      if (!consent) {
+        msg.className = 'msg err';
+        msg.textContent = 'Bitte setzen Sie das Zustimmungshäkchen.';
+        return;
+      }
+      msg.className = 'msg ok';
+      msg.textContent = 'Reservierung erfasst. Eine Bestätigungs-E-Mail folgt — es wurde keine Zahlung abgebucht.';
+      form.querySelector('button[type=submit]').disabled = true;
+    });
+  })();
+</script>
+
+<script>
+  /* --- Démo interactive du Prototype Titan OS --- */
+  let currentProtoView = 'vault';
+  const sensor = document.getElementById('sensor');
+  const sensorLabel = document.getElementById('sensor-label');
+  const osDot = document.getElementById('os-dot');
+
+  window.switchProtoView = function(viewName) {
+    currentProtoView = viewName;
+    document.querySelectorAll('.os-view').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.demo-tab').forEach(el => el.classList.remove('active'));
+    
+    const targetView = document.getElementById('view-' + (viewName === 'sub' ? 'sub' : viewName));
+    if (targetView) targetView.classList.add('active');
+
+    const tabEl = document.getElementById('tab-' + viewName);
+    if (tabEl) tabEl.classList.add('active');
+
+    if (viewName === 'lock') {
+      osDot.style.background = '#fbbf24';
+      osDot.style.boxShadow = '0 0 8px #fbbf24';
+      sensorLabel.textContent = '🔒 device locked — press the sensor';
+    } else {
+      osDot.style.background = '#4ade80';
+      osDot.style.boxShadow = '0 0 8px #4ade80';
+      sensorLabel.textContent = '⚡ biometric sensor ready — click here';
+    }
+  };
+
+  window.openSubView = function(type) {
+    document.querySelectorAll('.os-view').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.demo-tab').forEach(el => el.classList.remove('active'));
+    document.getElementById('view-sub').classList.add('active');
+
+    const titleEl = document.getElementById('sub-title-text');
+    const listEl = document.getElementById('sub-list-content');
+    listEl.innerHTML = '';
+
+    if (type === 'passwords') {
+      titleEl.textContent = '🔐 Vault Passwords (31)';
+      const items = [
+        ['github.com', 'florian@example.com'],
+        ['national-bank.com', 'Checking account ••• 2841'],
+        ['mail.proton.me', 'florian.pro'],
+        ['aws.amazon.com', 'root-sec@wascale.com']
+      ];
+      items.forEach(([domain, user]) => {
+        const div = document.createElement('div');
+        div.className = 'proto-item';
+        div.innerHTML = `<div><span class="domain">${domain}</span><br><span class="user">${user}</span></div><span style="color:var(--accent-2);font-size:1.1rem">👆</span>`;
+        div.onclick = () => switchProtoView('request');
+        listEl.appendChild(div);
+      });
+    } else if (type === 'add') {
+      titleEl.textContent = '➕ Add a secret';
+      listEl.innerHTML = `
+        <div style="padding:12px;text-align:center;color:var(--accent);font-size:0.85rem;">
+          <div style="font-size:2rem;margin-bottom:8px">📡 USB / BT Ready</div>
+          <p style="margin:0;color:var(--txt-2);font-size:0.75rem">Open your password manager or browser on PC/Mac. The device automatically captures the new encrypted entry.</p>
+        </div>
+      `;
+    } else if (type === 'favorites') {
+      titleEl.textContent = '❤️ Quick favorites';
+      const items = [
+        ['github.com', 'Priority access'],
+        ['terminal.wascale.io', 'SSH Key Ed25519']
+      ];
+      items.forEach(([domain, user]) => {
+        const div = document.createElement('div');
+        div.className = 'proto-item';
+        div.innerHTML = `<div><span class="domain">${domain}</span><br><span class="user">${user}</span></div><span style="color:#f472b6">★</span>`;
+        div.onclick = () => triggerBiometricAuth();
+        listEl.appendChild(div);
+      });
+    } else if (type === 'settings') {
+      titleEl.textContent = '⚙️ System & Security';
+      const specTab = document.getElementById('tab-settings');
+      if (specTab) specTab.classList.add('active');
+      listEl.innerHTML = `
+        <div class="proto-item"><span>Chassis</span><span class="domain" style="color:var(--accent-2)">Aluminum A-6001 (IP67)</span></div>
+        <div class="proto-item"><span>Secure Element</span><span class="domain" style="color:var(--accent)">EAL6+ certified</span></div>
+        <div class="proto-item"><span>Bluetooth LE</span><span class="domain">Active (AES-256 encrypted)</span></div>
+        <div class="proto-item"><span>Firmware</span><span class="domain" style="color:#a855f7">v1.0.4 Reproducible</span></div>
+      `;
+    }
+  };
+
+  window.triggerBiometricAuth = function() {
+    sensor.classList.add('ok');
+    sensorLabel.textContent = '✓ Fingerprint validated by the Secure Element';
+    osDot.style.background = '#4ade80';
+    
+    // Si on est dans bluetooth request, montrer la confirmation
+    if (currentProtoView === 'request' || currentProtoView === 'lock') {
+      const reqView = document.getElementById('view-request');
+      reqView.innerHTML = `
+        <div style="padding:30px 10px;text-align:center;color:var(--accent);">
+          <div style="font-size:2.5rem;margin-bottom:10px">✓</div>
+          <div class="pixel-title" style="color:var(--accent);font-size:1.6rem">PASSWORD<br>TRANSFERRED!</div>
+          <p style="color:var(--txt-2);font-size:0.75rem;margin-top:8px">USB/BT auto-type completed.<br>Immediate re-lock.</p>
+        </div>
+      `;
+      setTimeout(() => {
+        // Restaurer la vue request pour la prochaine fois
+        reqView.innerHTML = `
+          <div class="bt-title">BLUETOOTH<br>REQUEST</div>
+          <div class="bt-desc">A device requests permission to type a password.</div>
+          <div class="bt-device-box">
+            <div>Site: <span>github.com</span></div>
+            <div>Account: <span>florian@example.com</span></div>
+            <div>Device: <span>MacBook Pro (00:FE:28)</span></div>
+          </div>
+          <div class="bt-btn-group">
+            <button class="btn-proto-accept" onclick="triggerBiometricAuth()">✓ ACCEPT (FINGERPRINT)</button>
+            <button class="btn-proto-reject" onclick="switchProtoView('vault')">✗ REJECT</button>
+          </div>
+        `;
+        sensor.classList.remove('ok');
+        sensorLabel.textContent = '⚡ biometric sensor — click here';
+        switchProtoView('vault');
+      }, 2000);
+    } else {
+      setTimeout(() => {
+        sensor.classList.remove('ok');
+        sensorLabel.textContent = '⚡ biometric sensor ready — click here';
+        if (currentProtoView === 'lock') switchProtoView('vault');
+      }, 1500);
+    }
+  };
+
+  sensor.addEventListener('click', () => {
+    if (currentProtoView === 'lock') {
+      triggerBiometricAuth();
+      setTimeout(() => switchProtoView('vault'), 400);
+    } else if (currentProtoView === 'request') {
+      triggerBiometricAuth();
+    } else {
+      triggerBiometricAuth();
+      switchProtoView('request');
+    }
+  });
+  sensor.addEventListener('keydown', function(e){
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); sensor.click(); }
+  });
+</script>
+
+<script>
+/* ---------- Pluie Matrix discrète sur le hero ---------- */
+(function(){
+  var cv = document.getElementById('matrix');
+  if (!cv) return;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var ctx = cv.getContext('2d'),
+      GLYPHS = 'ABCDEF0123456789$#@&%*+=<>/\\|{}[]§µ',
+      SIZE = 15,
+      cols = 0, drops = [], speeds = [], dpr = 1, raf = null, last = 0;
+
+  function vw(){ return window.innerWidth; }
+  function vh(){ return window.innerHeight; }
+
+  function resize(){
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var w = vw(), h = vh();
+    cv.width  = w * dpr;
+    cv.height = h * dpr;
+    cv.style.width  = w + 'px';
+    cv.style.height = h + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    cols = Math.ceil(w / SIZE);
+    drops = []; speeds = [];
+    for (var i = 0; i < cols; i++){
+      drops[i]  = Math.random() * -h / SIZE;      // départ échelonné hors écran
+      speeds[i] = 0.35 + Math.random() * 0.55;    // vitesses variées
+    }
+    ctx.clearRect(0, 0, w, h);
+  }
+
+  function draw(ts){
+    raf = requestAnimationFrame(draw);
+    if (ts - last < 55) return;                   // ~18 images/s, suffisant et sobre
+    last = ts;
+
+    var w = vw(), h = vh();
+
+    // voile sombre : laisse une traînée derrière chaque glyphe
+    ctx.fillStyle = 'rgba(10,12,16,0.09)';
+    ctx.fillRect(0, 0, w, h);
+
+    ctx.font = SIZE + 'px ui-monospace, SFMono-Regular, Menlo, monospace';
+    ctx.textBaseline = 'top';
+
+    for (var i = 0; i < cols; i++){
+      var ch = GLYPHS.charAt((Math.random() * GLYPHS.length) | 0),
+          x  = i * SIZE,
+          y  = drops[i] * SIZE;
+
+      // tête de colonne plus claire, corps vert sombre
+      ctx.fillStyle = Math.random() > 0.94 ? 'rgba(180,255,214,0.85)' : 'rgba(74,222,128,0.55)';
+      ctx.fillText(ch, x, y);
+
+      if (y > h && Math.random() > 0.975) drops[i] = 0;
+      drops[i] += speeds[i];
+    }
+  }
+
+  function start(){ if (!raf) { last = 0; raf = requestAnimationFrame(draw); } }
+  function stop(){ if (raf) { cancelAnimationFrame(raf); raf = null; } }
+
+  resize();
+  start();
+
+  var t;
+  window.addEventListener('resize', function(){
+    clearTimeout(t);
+    t = setTimeout(function(){ resize(); }, 180);
+  });
+
+  // ne tourne pas dans un onglet en arrière-plan
+  document.addEventListener('visibilitychange', function(){
+    document.hidden ? stop() : start();
+  });
+})();
+</script>
+
+</body>
+</html>

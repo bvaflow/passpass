@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Journal de bord — conception d'un gestionnaire de mots de passe matériel</title>
+<meta name="description" content="12 notes techniques sur la conception de PassPass : écran Memory LCD, élément sécurisé open source TROPIC01, biométrie locale, Bluetooth, compilation reproductible, passkeys et modèle sans abonnement.">
+<link rel="canonical" href="https://passpass.store/blog.html">
+<meta name="keywords" content="conception clé de sécurité matérielle, élément sécurisé TROPIC01, Memory LCD basse consommation, firmware open source reproductible, biométrie locale, sécurité Bluetooth, passkeys FIDO2 WebAuthn">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="author" content="PassPass">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="PassPass">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:url" content="https://passpass.store/blog.html">
+<meta property="og:title" content="Journal de bord — conception d'un gestionnaire de mots de passe matériel">
+<meta property="og:description" content="12 notes techniques sur la conception de PassPass : écran Memory LCD, élément sécurisé open source TROPIC01, biométrie locale, Bluetooth, compilation reproductible, passkeys et modèle sans abonnement.">
+<meta property="og:image" content="https://passpass.store/img/element-securise-tropic01-open-source-audit.svg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Journal de bord — conception d'un gestionnaire de mots de passe matériel">
+<meta name="twitter:description" content="12 notes techniques sur la conception de PassPass : écran Memory LCD, élément sécurisé open source TROPIC01, biométrie locale, Bluetooth, compilation reproductible, passkeys et modèle sans abonnement.">
+<meta name="twitter:image" content="https://passpass.store/img/element-securise-tropic01-open-source-audit.svg">
+<link rel="alternate" type="application/rss+xml" title="Journal de bord PassPass" href="https://passpass.store/blog.html">
+<link rel="stylesheet" href="styles.css">
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "Blog",
+ "@id": "https://passpass.store/blog.html#blog",
+ "name": "Journal de bord PassPass",
+ "url": "https://passpass.store/blog.html",
+ "inLanguage": "fr-FR",
+ "description": "Notes techniques sur la conception d'un gestionnaire de mots de passe matériel.",
+ "publisher": {
+  "@id": "https://passpass.store/#org"
+ },
+ "blogPost": [
+  {
+   "@type": "BlogPosting",
+   "@id": "https://passpass.store/blog.html#ecran",
+   "headline": "Pourquoi nous avons renoncé à l'écran couleur haute définition",
+   "url": "https://passpass.store/blog.html#ecran",
+   "image": "https://passpass.store/img/ecran-memory-lcd-gestionnaire-mot-de-passe-materiel.svg",
+   "description": "La première fiche technique annonçait un écran couleur de 1,5 pouce en 320 × 320 pixels, et une autonomie de plusieurs semaines. Ces deux lignes étaient incompatibles, et il a fallu en sacrifier une.",
+   "articleSection": "Conception matérielle",
+   "inLanguage": "fr-FR",
+   "author": {
+    "@type": "Organization",
+    "name": "PassPass"
+   },
+   "publisher": {
+    "@id": "https://passpass.store/#org"
+   }
+  },
+  {
+   "@type": "BlogPosting",
+   "@id": "https://passpass.store/blog.html#phishing",
+   "headline": "Un écran vaut mieux qu'un contrôle antihameçonnage",
+   "url": "https://passpass.store/blog.html#phishing",
+   "image": "https://passpass.store/img/ecran-verification-anti-phishing-hameconnage.svg",
+   "description": "Les gestionnaires de mots de passe modernes refusent de remplir un formulaire si le domaine ne correspond pas à celui enregistré. C'est une excellente protection, et elle bloque la grande majorité des tentatives d'hameçonnage. Elle repose pourtant sur une hypothèse : que le navigateur dise",
+   "articleSection": "Sécurité",
+   "inLanguage": "fr-FR",
+   "author": {
+    "@type": "Organization",
+    "name": "PassPass"
+   },
+   "publisher": {
+    "@id": "https://passpass.store/#org"
+   }
+  },
+  {
+   "@type": "BlogPosting",
+   "@id": "https://passpass.store/blog.html#element-securise",
+   "headline": "Choisir un élément sécurisé quand on refuse de signer un accord de confidentialité",
+   "url": "https://passpass.store/blog.html#element-securise",
+   "image": "https://passpass.store/img/element-securise-tropic01-open-source-audit.svg",
+   "description": "L'élément sécurisé est la pièce qui porte l'ensemble de la promesse : une puce dédiée, isolée du processeur principal, conçue pour résister aux attaques physiques et par canaux auxiliaires. Les références du secteur — ST33, NXP SE050, Infineon OPTIGA, Samsung S3D350 — sont excellentes et c",
+   "articleSection": "Chaîne d'approvisionnement",
+   "inLanguage": "fr-FR",
+   "author": {
+    "@type": "Organization",
+    "name": "PassPass"
+   },
+   "publisher": {
+    "@id": "https://passpass.store/#org"
+   }
+  },
+  {
+   "@type": "BlogPosting",
+   "@id": "https://passpass.store/blog.html#abonnement",
+   "headline": "Pourquoi il n'y aura pas d'abonnement",
+   "url": "https://passpass.store/blog.html#abonnement",
+   "image": "https://passpass.store/img/gestionnaire-mot-de-passe-sans-abonnement-paiement-unique.svg",
+   "description": "L'abonnement est le modèle dominant du secteur, et il se défend : revenus prévisibles, développement continu, support financé. Nous avons choisi le paiement unique, et il vaut mieux exposer les deux faces de cette décision.",
+   "articleSection": "Modèle économique",
+   "inLanguage": "fr-FR",
+   "author": {
+    "@type": "Organization",
+    "name": "PassPass"
+   },
+   "publisher": {
+    "@id": "https://passpass.store/#org"
+   }
+  },
+  {
+   "@type": "BlogPosting",
+   "@id": "https://passpass.store/blog.html#biometrie",
+   "headline": "Ce qu'une empreinte protège, et ce qu'elle ne protège pas",
+   "url": "https://passpass.store/blog.html#biometrie",
+   "image": "https://passpass.store/img/lecteur-empreinte-digitale-biometrie-locale-securisee.svg",
+   "description": "La biométrie est souvent présentée comme le remplacement définitif du mot de passe. C'est une simplification qui mène à de mauvaises décisions de sécurité, et nous préférons décrire précisément ce que le capteur de PassPass apporte.",
+   "articleSection": "Biométrie",
+   "inLanguage": "fr-FR",
+   "author": {
+    "@type": "Organization",
+    "name": "PassPass"
+   },
+   "publisher": {
+    "@id": "https://passpass.store/#org"
+   }
+  },
+  {
+   "@type": "BlogPosting",
+   "@id": "https://passpass.store/blog.html#titane",
+   "headline": "Le titane est un choix esthétique, pas un choix de sécurité",
+   "url": "https://passpass.store/blog.html#titane",
+   "image": "https://passpass.store/img/boitier-titane-usine-ip67-etanche-securite.svg",
+   "description": "Un boîtier en titane grade 5 usiné dans la masse, c'est agréable à annoncer et agréable à tenir. Il faut cependant être honnête sur ce que cela apporte : presque rien en matière de sécurité. Un attaquant équipé d'un laboratoire ne sera pas arrêté par le métal du boîtier — il attaquera la p",
+   "articleSection": "Conception matérielle",
+   "inLanguage": "fr-FR",
+   "author": {
+    "@type": "Organization",
+    "name": "PassPass"
+   },
+   "publisher": {
+    "@id": "https://passpass.store/#org"
+   }
+  },
+  {
+   "@type": "BlogPosting",
+   "@id": "https://passpass.store/blog.html#fabrication",
+   "headline": "Fabriquer en Asie quand on vend de la confiance",
+   "url": "https://passpass.store/blog.html#fabrication",
+   "image": "https://passpass.store/img/fabrication-assemblage-provisionnement-securise-confiance.svg",
+   "description": "Posons le problème sans détour : la quasi-totalité de l'électronique grand public est assemblée en Chine, et les rares acteurs qui font autrement le font à un coût considérable. Ledger fabrique en France, Trezor en République tchèque, et tous deux le mettent en avant comme un argument comm",
+   "articleSection": "Industrialisation",
+   "inLanguage": "fr-FR",
+   "author": {
+    "@type": "Organization",
+    "name": "PassPass"
+   },
+   "publisher": {
+    "@id": "https://passpass.store/#org"
+   }
+  },
+  {
+   "@type": "BlogPosting",
+   "@id": "https://passpass.store/blog.html#bluetooth",
+   "headline": "Le Bluetooth est notre maillon faible, et nous l'avons gardé quand même",
+   "url": "https://passpass.store/blog.html#bluetooth",
+   "image": "https://passpass.store/img/bluetooth-securite-cle-materielle-risque.svg",
+   "description": "Toute liaison sans fil est une surface d'attaque supplémentaire. Le Bluetooth a un historique de vulnérabilités qui n'incite pas à l'enthousiasme, et un appareil de sécurité sans radio est indiscutablement plus sûr qu'un appareil qui en possède une. Trezor est allé jusqu'à installer un int",
+   "articleSection": "Sécurité",
+   "inLanguage": "fr-FR",
+   "author": {
+    "@type": "Organization",
+    "name": "PassPass"
+   },
+   "publisher": {
+    "@id": "https://passpass.store/#org"
+   }
+  },
+  {
+   "@type": "BlogPosting",
+   "@id": "https://passpass.store/blog.html#open-source",
+   "headline": "Ce que « firmware open source » garantit vraiment",
+   "url": "https://passpass.store/blog.html#open-source",
+   "image": "https://passpass.store/img/firmware-open-source-build-reproductible-attestation.svg",
+   "description": "L'annonce d'un firmware en source ouverte est devenue un argument de vente presque obligatoire sur ce marché. Elle est souvent comprise de travers, y compris par des acheteurs avertis, et il vaut la peine de préciser ce qu'elle apporte et ce qu'elle n'apporte pas.",
+   "articleSection": "Transparence",
+   "inLanguage": "fr-FR",
+   "author": {
+    "@type": "Organization",
+    "name": "PassPass"
+   },
+   "publisher": {
+    "@id": "https://passpass.store/#org"
+   }
+  },
+  {
+   "@type": "BlogPosting",
+   "@id": "https://passpass.store/blog.html#recuperation",
+   "headline": "Perdre son boîtier : concevoir une récupération qui ne soit pas une porte dérobée",
+   "url": "https://passpass.store/blog.html#recuperation",
+   "image": "https://passpass.store/img/sauvegarde-recuperation-coffre-mot-de-passe-chiffre.svg",
+   "description": "C'est la question qui revient systématiquement, et c'est la bonne : que se passe-t-il si l'appareil est perdu, volé, détruit ? Elle met le doigt sur la tension centrale de tout système de ce type. Une récupération trop facile est une porte dérobée. Une récupération impossible fabrique des ",
+   "articleSection": "Conception",
+   "inLanguage": "fr-FR",
+   "author": {
+    "@type": "Organization",
+    "name": "PassPass"
+   },
+   "publisher": {
+    "@id": "https://passpass.store/#org"
+   }
+  },
+  {
+   "@type": "BlogPosting",
+   "@id": "https://passpass.store/blog.html#partage",
+   "headline": "Pourquoi nous ne ferons pas de partage familial",
+   "url": "https://passpass.store/blog.html#partage",
+   "image": "https://passpass.store/img/partage-familial-gestionnaire-mot-de-passe-perimetre.svg",
+   "description": "C'est la fonction la plus demandée dès qu'on présente le produit, et la réponse est non. Pas « pas tout de suite » : non, par construction.",
+   "articleSection": "Périmètre produit",
+   "inLanguage": "fr-FR",
+   "author": {
+    "@type": "Organization",
+    "name": "PassPass"
+   },
+   "publisher": {
+    "@id": "https://passpass.store/#org"
+   }
+  },
+  {
+   "@type": "BlogPosting",
+   "@id": "https://passpass.store/blog.html#passkeys",
+   "headline": "Les passkeys vont-elles rendre ce produit inutile ?",
+   "url": "https://passpass.store/blog.html#passkeys",
+   "image": "https://passpass.store/img/passkeys-fido2-webauthn-avenir-mot-de-passe.svg",
+   "description": "La question mérite d'être posée franchement, parce qu'elle porte sur la pertinence même du projet. Apple, Google et Microsoft poussent activement les passkeys, une authentification sans mot de passe fondée sur la cryptographie à clé publique. Si les mots de passe disparaissent, à quoi sert",
+   "articleSection": "Prospective",
+   "inLanguage": "fr-FR",
+   "author": {
+    "@type": "Organization",
+    "name": "PassPass"
+   },
+   "publisher": {
+    "@id": "https://passpass.store/#org"
+   }
+  }
+ ]
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "Accueil",
+   "item": "https://passpass.store/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "Journal de bord",
+   "item": "https://passpass.store/blog.html"
+  }
+ ]
+}
+</script>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a href="index.html" class="logo"><span class="logo-mark">P</span> PassPass</a>
+    <nav class="nav-links">
+      <a href="index.html#avantages">Avantages</a>
+      <a href="index.html#specs">Caractéristiques</a>
+      <a href="index.html#import">Import</a>
+      <a href="comparatif.html">Comparatif</a>
+      <div class="lang">
+        <a class="lang-current" href="en/index.html">🌐 FR ▾</a>
+        <div class="lang-menu">
+          <a href="en/index.html">English</a>
+          <a class="active">Français</a>
+          <a href="de/index.html">Deutsch</a>
+          <a href="es/index.html">Español</a>
+          <a href="it/index.html">Italiano</a>
+          <a href="pt/index.html">Português</a>
+          <a href="id/index.html">Bahasa Indonesia</a>
+          <a href="tr/index.html">Türkçe</a>
+          <a href="vi/index.html">Tiếng Việt</a>
+          <a href="ru/index.html">Русский</a>
+          <a href="ja/index.html">日本語</a>
+          <a href="zh/index.html">简体中文</a>
+          <a href="zh-tw/index.html">繁體中文</a>
+          <a href="th/index.html">ไทย</a>
+          <a href="ar/index.html">العربية</a>
+        </div>
+      </div>
+      <a href="index.html#precommande" class="btn">Réserver</a>
+    </nav>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="wrap">
+    <div class="crumb"><a href="index.html">Accueil</a> › Journal de bord</div>
+    <h1>Journal de bord</h1>
+    <p class="lede">
+      Les décisions techniques derrière PassPass, y compris celles qui nous coûtent quelque chose.
+      Un produit de sécurité qui ne détaille pas ses arbitrages demande une confiance qu'il n'a rien fait
+      pour mériter.
+    </p>
+
+    <nav class="toc" aria-label="Sommaire des articles">
+      <h2 class="toc-title">Sommaire — 12 articles</h2>
+      <ol>
+        <li><a href="#ecran">Pourquoi nous avons renoncé à l'écran couleur haute définition</a></li>
+        <li><a href="#phishing">Un écran vaut mieux qu'un contrôle antihameçonnage</a></li>
+        <li><a href="#element-securise">Choisir un élément sécurisé sans signer d'accord de confidentialité</a></li>
+        <li><a href="#abonnement">Pourquoi il n'y aura pas d'abonnement</a></li>
+        <li><a href="#biometrie">Ce qu'une empreinte protège, et ce qu'elle ne protège pas</a></li>
+        <li><a href="#titane">Le titane est un choix esthétique, pas un choix de sécurité</a></li>
+        <li><a href="#fabrication">Fabriquer en Asie quand on vend de la confiance</a></li>
+        <li><a href="#bluetooth">Le Bluetooth est notre maillon faible, et nous l'avons gardé</a></li>
+        <li><a href="#open-source">Ce que « firmware open source » garantit vraiment</a></li>
+        <li><a href="#recuperation">Perdre son boîtier : une récupération sans porte dérobée</a></li>
+        <li><a href="#partage">Pourquoi nous ne ferons pas de partage familial</a></li>
+        <li><a href="#passkeys">Les passkeys vont-elles rendre ce produit inutile ?</a></li>
+      </ol>
+    </nav>
+  </div>
+</section>
+
+<section>
+  <div class="wrap" style="max-width:760px">
+
+    <!-- ============ ARTICLE 1 ============ -->
+    <article class="post" id="ecran">
+      <div class="post-meta">Conception matérielle · 6 min de lecture</div>
+      <h2>Pourquoi nous avons renoncé à l'écran couleur haute définition</h2>
+
+      <img class="post-img" src="img/ecran-memory-lcd-gestionnaire-mot-de-passe-materiel.svg" alt="Écran Memory LCD d'un gestionnaire de mots de passe matériel affichant une demande de validation en permanence" width="1200" height="630" loading="lazy" decoding="async">
+
+      <p>
+        La première fiche technique annonçait un écran couleur de 1,5 pouce en 320 × 320 pixels, et une
+        autonomie de plusieurs semaines. Ces deux lignes étaient incompatibles, et il a fallu en sacrifier une.
+      </p>
+      <p>
+        Un panneau AMOLED de cette catégorie consomme quelques dizaines de milliampères dès qu'il est
+        allumé. Sur une batterie compatible avec un objet de poche, cela donne une autonomie qui se compte
+        en jours — c'est précisément pour cette raison que les montres connectées se rechargent tous les
+        deux soirs. Promettre des semaines aurait été un mensonge que le premier utilisateur aurait
+        constaté dans la semaine suivant la livraison.
+      </p>
+      <p>
+        Nous sommes passés à une technologie <strong>Memory-in-Pixel</strong> : chaque pixel embarque un
+        bit de mémoire et conserve son état sans rafraîchissement. La consommation au repos tombe aux
+        alentours de 100 microampères, soit plusieurs centaines de fois moins. La contrepartie est réelle :
+        64 couleurs au lieu de plusieurs millions, et pas de rétroéclairage.
+      </p>
+      <p>
+        Ce qui n'était au départ qu'un compromis subi s'est révélé être un meilleur produit. Un affichage
+        permanent ne coûtant presque rien en énergie, le boîtier peut laisser la demande d'autorisation
+        <em>affichée en continu</em>, au lieu de l'éteindre après dix secondes pour économiser la batterie.
+        Sur un appareil dont la fonction de sécurité consiste précisément à vous montrer ce que vous
+        validez, éteindre l'écran était une aberration que nous n'avions pas vue.
+      </p>
+      <p>
+        Nous avons aussi retenu une liaison SPI plutôt que MIPI. Le MIPI impose un processeur applicatif
+        nettement plus puissant, donc une surface d'attaque plus large et une consommation supérieure. En
+        SPI, l'écran est piloté directement par le microcontrôleur sécurisé. Puisque l'affichage du domaine
+        <em>est</em> la fonction de sécurité, il aurait été absurde de la déléguer à un module tiers
+        exécutant son propre firmware, que nous n'aurions pas pu auditer.
+      </p>
+      <p class="post-more">À lire ensuite : <a href="#phishing">pourquoi l'écran vaut mieux qu'un contrôle antihameçonnage</a>, ou la <a href="index.html#specs">fiche technique complète du boîtier</a>.</p>
+    </article>
+
+    <!-- ============ ARTICLE 2 ============ -->
+    <article class="post" id="phishing">
+      <div class="post-meta">Sécurité · 5 min de lecture</div>
+      <h2>Un écran vaut mieux qu'un contrôle antihameçonnage</h2>
+
+      <img class="post-img" src="img/ecran-verification-anti-phishing-hameconnage.svg" alt="Vérification anti-hameçonnage du nom de domaine sur l'écran d'une clé de sécurité matérielle" width="1200" height="630" loading="lazy" decoding="async">
+
+      <p>
+        Les gestionnaires de mots de passe modernes refusent de remplir un formulaire si le domaine ne
+        correspond pas à celui enregistré. C'est une excellente protection, et elle bloque la grande
+        majorité des tentatives d'hameçonnage. Elle repose pourtant sur une hypothèse : que le navigateur
+        dise la vérité sur la page affichée.
+      </p>
+      <p>
+        Cette hypothèse tombe dès que la machine est compromise. Une extension malveillante, un proxy
+        local, un navigateur modifié : plusieurs voies permettent de fausser ce que le gestionnaire croit
+        voir. La vérification et la chose vérifiée s'exécutent alors dans le même environnement, contrôlé
+        par l'attaquant. C'est une faiblesse structurelle, pas un défaut d'implémentation.
+      </p>
+      <p>
+        Un écran physique change la nature du problème. Le boîtier reçoit le domaine, l'affiche sur son
+        propre matériel et attend. L'attaquant peut mentir au navigateur autant qu'il veut, il ne contrôle
+        pas ces pixels-là. La décision finale revient à un humain qui lit une information hors du système
+        compromis.
+      </p>
+      <p>
+        Nous ne prétendons pas que c'est infaillible. Un utilisateur pressé validera sans lire — c'est
+        d'ailleurs le mode d'échec principal de tous les dispositifs à confirmation. Cela explique le
+        soin apporté à l'affichage : domaine en entier, jamais tronqué, taille de police suffisante, et
+        mise en évidence de la partie du nom qui compte réellement.
+      </p>
+      <p>
+        Il faut le dire clairement : sur ce point précis, une clé FIDO2 ordinaire offre une protection
+        équivalente, voire supérieure, car la vérification du domaine est faite par la machine et non par
+        l'œil humain. La différence est qu'une clé FIDO2 ne fonctionne que sur les sites qui l'implémentent —
+        aujourd'hui une minorité. PassPass couvre les deux mondes : FIDO2 là où il existe, vérification
+        visuelle partout ailleurs.
+      </p>
+      <p class="post-more">Voir aussi : <a href="#passkeys">les passkeys et FIDO2</a>, et le <a href="comparatif.html#menaces">comparatif des modèles de menace</a>.</p>
+    </article>
+
+    <!-- ============ ARTICLE 3 ============ -->
+    <article class="post" id="element-securise">
+      <div class="post-meta">Chaîne d'approvisionnement · 7 min de lecture</div>
+      <h2>Choisir un élément sécurisé quand on refuse de signer un accord de confidentialité</h2>
+
+      <img class="post-img" src="img/element-securise-tropic01-open-source-audit.svg" alt="Élément sécurisé open source TROPIC01 utilisé dans un gestionnaire de mots de passe matériel" width="1200" height="630" loading="lazy" decoding="async">
+
+      <p>
+        L'élément sécurisé est la pièce qui porte l'ensemble de la promesse : une puce dédiée, isolée du
+        processeur principal, conçue pour résister aux attaques physiques et par canaux auxiliaires. Les
+        références du secteur — ST33, NXP SE050, Infineon OPTIGA, Samsung S3D350 — sont excellentes et
+        certifiées EAL6+.
+      </p>
+      <p>
+        Elles posent un problème auquel nous ne nous attendions pas. <strong>La plupart de ces
+        certifications s'accompagnent d'un accord de confidentialité</strong> : le fabricant du produit
+        final s'engage à ne pas divulguer certains détails d'implémentation. Difficile de promettre un
+        firmware auditable et des compilations reproductibles tout en ayant signé l'engagement de taire
+        une partie du fonctionnement.
+      </p>
+      <p>
+        S'ajoute une contrainte prosaïque : ces composants s'achètent en volume, avec des engagements
+        commerciaux qu'une première série ne permet pas d'absorber.
+      </p>
+      <p>
+        Nous nous orientons vers le <strong>TROPIC01</strong> de Tropic Square, premier élément sécurisé
+        à architecture ouverte et auditable, bâti sur RISC-V, disponible <em>sans accord de
+        confidentialité</em> et distribué à l'unité par les revendeurs de composants classiques. Le choix
+        n'est pas gratuit : ce composant est nettement plus récent que les puces de sécurité éprouvées
+        depuis vingt ans dans les cartes bancaires, et il n'a pas encore l'historique d'attaques publiées
+        qui fait la confiance dans ce domaine.
+      </p>
+      <p>
+        Nous assumons cet arbitrage. Un composant vérifiable dont on peut lire l'architecture nous paraît
+        préférable à un composant plus éprouvé dont il faut croire le constructeur sur parole — d'autant
+        que la vérifiabilité est exactement ce que nous vendons. Nous documenterons ce choix, et nous
+        reviendrons dessus s'il s'avère mauvais.
+      </p>
+      <p class="post-more">Sur le même sujet : <a href="#open-source">ce que garantit un firmware open source</a> et <a href="#fabrication">la question de la fabrication</a>.</p>
+    </article>
+
+    <!-- ============ ARTICLE 4 ============ -->
+    <article class="post" id="abonnement">
+      <div class="post-meta">Modèle économique · 4 min de lecture</div>
+      <h2>Pourquoi il n'y aura pas d'abonnement</h2>
+
+      <img class="post-img" src="img/gestionnaire-mot-de-passe-sans-abonnement-paiement-unique.svg" alt="Gestionnaire de mots de passe sans abonnement, en paiement unique, face aux offres par abonnement" width="1200" height="630" loading="lazy" decoding="async">
+
+      <p>
+        L'abonnement est le modèle dominant du secteur, et il se défend : revenus prévisibles,
+        développement continu, support financé. Nous avons choisi le paiement unique, et il vaut mieux
+        exposer les deux faces de cette décision.
+      </p>
+      <p>
+        La raison principale n'est pas commerciale, elle découle de l'architecture. PassPass ne nécessite
+        aucun serveur pour fonctionner : pas de synchronisation en ligne, pas de compte, pas de coffre
+        hébergé. Nous n'avons donc aucun coût récurrent par utilisateur à couvrir. Facturer un abonnement
+        pour un service qui ne consomme rien reviendrait à faire payer une rente.
+      </p>
+      <p>
+        La conséquence est plus intéressante que la cause. Puisque aucun serveur n'est nécessaire,
+        <strong>nous n'avons techniquement pas les moyens de désactiver votre appareil</strong>. Pas de
+        vérification de licence, pas d'activation, aucun interrupteur distant. Si l'entreprise disparaissait,
+        votre boîtier continuerait de fonctionner exactement comme la veille, et votre sauvegarde resterait
+        lisible avec l'outil de restauration publié en source ouverte. Aucun éditeur par abonnement ne peut
+        formuler cette promesse.
+      </p>
+      <p>
+        Le risque, lui, pèse sur nous. Sans revenu récurrent, une erreur d'estimation sur le coût de
+        production ne se rattrape pas : chaque client ne paie qu'une fois. C'est la raison pour laquelle
+        nous n'annonçons aucune date de livraison avant d'avoir les devis d'industrialisation en main, et
+        pourquoi nous préférons décaler que promettre à vide.
+      </p>
+      <p class="post-more">Détail des coûts sur dix ans dans le <a href="comparatif.html#cout">comparatif tarifaire</a>, et sur la <a href="index.html#tarifs">page tarifs</a>.</p>
+    </article>
+
+    <!-- ============ ARTICLE 5 ============ -->
+    <article class="post" id="biometrie">
+      <div class="post-meta">Biométrie · 5 min de lecture</div>
+      <h2>Ce qu'une empreinte protège, et ce qu'elle ne protège pas</h2>
+
+      <img class="post-img" src="img/lecteur-empreinte-digitale-biometrie-locale-securisee.svg" alt="Lecteur d'empreinte digitale à comparaison locale dans l'élément sécurisé du boîtier" width="1200" height="630" loading="lazy" decoding="async">
+
+      <p>
+        La biométrie est souvent présentée comme le remplacement définitif du mot de passe. C'est une
+        simplification qui mène à de mauvaises décisions de sécurité, et nous préférons décrire
+        précisément ce que le capteur de PassPass apporte.
+      </p>
+      <p>
+        Une empreinte digitale n'est pas un secret. Vous la laissez sur tout ce que vous touchez, elle est
+        photographiable, et surtout <strong>elle ne peut pas être changée après une compromission</strong>.
+        C'est pourquoi le gabarit ne quitte jamais l'élément sécurisé du boîtier : il n'est transmis ni à
+        l'ordinateur, ni à un service en ligne, ni à nous. Nous n'avons aucune infrastructure capable de le
+        recevoir, et c'est délibéré.
+      </p>
+      <p>
+        Ce que l'empreinte apporte réellement, c'est la <em>présence</em>. Elle atteste qu'un être humain
+        se trouve devant l'appareil au moment de la validation. C'est exactement ce qui manque à un
+        gestionnaire logiciel : un logiciel malveillant peut rejouer un mot de passe maître intercepté, il
+        ne peut pas fabriquer un doigt sur un capteur. La biométrie n'est pas ici un facteur de
+        connaissance, c'est un facteur de présence physique.
+      </p>
+      <p>
+        Ses limites doivent être dites. Un capteur capacitif grand public n'est pas conçu pour résister à
+        un adversaire déterminé et outillé ; les contournements par moulage sont documentés depuis des
+        années sur toutes les technologies de ce type. Et aucune biométrie ne protège contre la contrainte
+        physique : quelqu'un qui vous force la main obtient votre doigt.
+      </p>
+      <p>
+        C'est pour cette raison que le PIN de secours n'est pas un simple filet de sécurité en cas de
+        panne, mais un choix d'architecture. Il garantit que le doigt n'est jamais l'unique chemin d'accès —
+        ni pour vous, ni pour quelqu'un qui vous le prendrait.
+      </p>
+      <p class="post-more">Lié : <a href="#recuperation">la récupération du coffre</a> et <a href="index.html#avantages">les avantages du boîtier</a>.</p>
+    </article>
+
+    <!-- ============ ARTICLE 6 ============ -->
+    <article class="post" id="titane">
+      <div class="post-meta">Conception matérielle · 6 min de lecture</div>
+      <h2>Le titane est un choix esthétique, pas un choix de sécurité</h2>
+
+      <img class="post-img" src="img/boitier-titane-usine-ip67-etanche-securite.svg" alt="Boîtier en titane usiné dans la masse, étanche IP67, d'une clé de sécurité matérielle" width="1200" height="630" loading="lazy" decoding="async">
+
+      <p>
+        Un boîtier en titane grade 5 usiné dans la masse, c'est agréable à annoncer et agréable à tenir.
+        Il faut cependant être honnête sur ce que cela apporte : <strong>presque rien en matière de
+        sécurité</strong>. Un attaquant équipé d'un laboratoire ne sera pas arrêté par le métal du
+        boîtier — il attaquera la puce, pas la coque. La résistance aux attaques physiques vient de
+        l'élément sécurisé, pas de l'enveloppe.
+      </p>
+      <p>
+        Ce que le titane apporte réellement : il ne se déforme pas, ne se raye pas au fond d'une poche,
+        ne devient pas cassant avec le temps, et permet une étanchéité durable parce qu'un bloc usiné
+        n'a pas de coque collée qui se décolle au bout de trois ans. Pour un objet censé accompagner
+        quelqu'un pendant dix ans, c'est défendable. Mais c'est un argument de longévité, pas de sécurité,
+        et nous ne le présenterons pas autrement.
+      </p>
+      <p>
+        C'est aussi, de loin, le poste de coût le plus contestable du projet. L'usinage titane en petite
+        série coûte plusieurs fois le prix d'un boîtier aluminium anodisé, pour un bénéfice fonctionnel
+        marginal. La question de le remplacer se posait sérieusement, et nous avions promis que la
+        décision serait annoncée ici. La voici : <strong>la première série sera en aluminium usiné
+        dans la masse, anodisation dure</strong>. Mêmes cotes, même étanchéité, même sécurité — la
+        protection n'a jamais résidé dans le métal — pour un tiers du coût, ce qui se retrouve dans
+        le prix de vente. Le titane survit sous la seule forme qui lui va : une édition limitée
+        numérotée — One Ti — pour ceux qui veulent le métal pour le plaisir du métal, à son vrai prix.
+      </p>
+      <p>
+        L'indice IP67 pose un problème plus intéressant. Deux ouvertures traversent l'enceinte étanche :
+        le port USB-C et le capteur d'empreinte. Le capteur se scelle correctement. Le port, lui, est le
+        point dur classique de toute certification d'étanchéité. Deux voies s'offrent à nous — un
+        connecteur nativement étanché avec joint, ou la <em>suppression pure et simple du port</em> au
+        profit d'une recharge sans fil.
+      </p>
+      <p>
+        La seconde option est tentante bien au-delà de l'étanchéité : plus de port, c'est une interface
+        physique de moins par laquelle attaquer l'appareil, et l'élimination complète des attaques par
+        câble malveillant. Une contrainte d'industrialisation qui se transforme en argument de sécurité,
+        c'est assez rare pour être signalé.
+      </p>
+      <p class="post-more">Suite logique : <a href="#fabrication">l'industrialisation</a> et <a href="#bluetooth">le choix de la radio</a>.</p>
+    </article>
+
+    <!-- ============ ARTICLE 7 ============ -->
+    <article class="post" id="fabrication">
+      <div class="post-meta">Industrialisation · 8 min de lecture</div>
+      <h2>Fabriquer en Asie quand on vend de la confiance</h2>
+
+      <img class="post-img" src="img/fabrication-assemblage-provisionnement-securise-confiance.svg" alt="Chaîne de fabrication d'un appareil de sécurité : l'assemblage est séparé du provisionnement des clés" width="1200" height="630" loading="lazy" decoding="async">
+
+      <p>
+        Posons le problème sans détour : la quasi-totalité de l'électronique grand public est assemblée
+        en Chine, et les rares acteurs qui font autrement le font à un coût considérable. Ledger fabrique
+        en France, Trezor en République tchèque, et tous deux le mettent en avant comme un argument
+        commercial central. Nous n'avons pas, à ce stade, les volumes qui rendraient cette voie
+        envisageable.
+      </p>
+      <p>
+        La question qui nous sera posée dès la première publication publique est donc légitime : pourquoi
+        faire confiance à un appareil de sécurité assemblé par un tiers, dans un pays où l'on ne contrôle
+        pas la chaîne ? Répondre « nos partenaires sont sérieux » ne suffit pas, et ne devrait convaincre
+        personne.
+      </p>
+      <p>
+        La réponse tient dans une distinction : <strong>assembler n'est pas provisionner</strong>. Un
+        assembleur monte des composants sur une carte. Il n'a aucune raison légitime de générer des clés,
+        de charger un firmware final ou de connaître le moindre secret. Le risque documenté sur ce type
+        de produit est précisément l'altération pendant la fabrication — et il ne se traite pas par la
+        confiance, mais par l'architecture.
+      </p>
+      <p>
+        Ce que nous nous engageons à faire : les cartes arrivent <em>vierges</em>. Le firmware final est
+        compilé et signé chez nous, avec notre propre clé, et chargé lors d'une étape de provisionnement
+        distincte de l'assemblage. Les clés de l'appareil
+        sont générées par l'élément sécurisé lui-même, au premier démarrage, chez l'utilisateur — elles
+        n'existent nulle part avant. Un démarrage sécurisé refuse tout firmware non signé par nous, et
+        l'appareil peut attester de la version qu'il exécute.
+      </p>
+      <p>
+        Cette architecture a une propriété qui nous plaît : elle ne demande pas de nous croire. Un
+        assembleur malveillant qui remplacerait un composant produirait un appareil incapable de passer
+        l'attestation. Le contrôle ne repose pas sur notre bonne foi, mais sur une vérification que
+        n'importe qui peut reproduire.
+      </p>
+      <p>
+        Reste une limite que nous ne pouvons pas contourner : une altération matérielle profonde, au
+        niveau du silicium, échapperait à ces contrôles. C'est vrai de tous les produits du marché, y
+        compris ceux fabriqués en Europe, dont les puces viennent de toute façon d'Asie. Quiconque prétend
+        le contraire vend du confort intellectuel.
+      </p>
+      <p class="post-more">Complément indispensable : <a href="#open-source">compilation reproductible et attestation</a>.</p>
+    </article>
+
+    <!-- ============ ARTICLE 8 ============ -->
+    <article class="post" id="bluetooth">
+      <div class="post-meta">Sécurité · 5 min de lecture</div>
+      <h2>Le Bluetooth est notre maillon faible, et nous l'avons gardé quand même</h2>
+
+      <img class="post-img" src="img/bluetooth-securite-cle-materielle-risque.svg" alt="Risques de sécurité du Bluetooth sur une clé matérielle de gestion de mots de passe" width="1200" height="630" loading="lazy" decoding="async">
+
+      <p>
+        Toute liaison sans fil est une surface d'attaque supplémentaire. Le Bluetooth a un historique de
+        vulnérabilités qui n'incite pas à l'enthousiasme, et un appareil de sécurité sans radio est
+        indiscutablement plus sûr qu'un appareil qui en possède une. Trezor est allé jusqu'à installer un
+        interrupteur physique de coupure sur son modèle le plus récent, ce qui en dit long sur le
+        consensus du secteur.
+      </p>
+      <p>
+        Nous avons conservé le Bluetooth pour une raison simple : sans lui, l'appareil est inutilisable
+        sur téléphone, et un gestionnaire de mots de passe qui ne fonctionne pas en mobilité ne sert
+        pas à grand-chose. C'est un arbitrage entre sécurité et existence commerciale, et nous préférons
+        le formuler ainsi plutôt que de prétendre qu'il n'y a pas de compromis.
+      </p>
+      <p>
+        Ce que nous faisons pour limiter les dégâts. La radio ne transporte <strong>jamais</strong> de
+        secret en clair : le canal Bluetooth ne sert qu'à transmettre la demande — quel domaine, quel
+        compte — et à recevoir la réponse. Le mot de passe lui-même est saisi par émulation de clavier,
+        chiffré de bout en bout entre le boîtier et l'appareil apparié, avec une clé négociée lors d'un
+        appairage confirmé sur l'écran du boîtier.
+      </p>
+      <p>
+        La radio reste éteinte par défaut et ne s'active que sur demande explicite. Surtout, la
+        compromission de la liaison ne suffit jamais : un attaquant qui contrôlerait entièrement le canal
+        radio pourrait déclencher une demande, mais elle s'afficherait sur l'écran et attendrait un doigt
+        qu'il n'a pas. La validation physique est la garantie qui rend le maillon faible acceptable.
+      </p>
+      <p>
+        Nous étudions l'ajout d'une coupure matérielle de la radio, à la manière de ce que fait Trezor.
+        Si le boîtier se passe finalement de port USB-C, cette décision devient plus délicate — on ne
+        peut pas retirer les deux.
+      </p>
+      <p class="post-more">Voir aussi : <a href="#titane">le port USB-C et l'étanchéité</a>, et <a href="comparatif.html#materiels">le comparatif matériel</a>.</p>
+    </article>
+
+    <!-- ============ ARTICLE 9 ============ -->
+    <article class="post" id="open-source">
+      <div class="post-meta">Transparence · 6 min de lecture</div>
+      <h2>Ce que « firmware open source » garantit vraiment</h2>
+
+      <img class="post-img" src="img/firmware-open-source-build-reproductible-attestation.svg" alt="Firmware open source, compilation reproductible et attestation matérielle du binaire exécuté" width="1200" height="630" loading="lazy" decoding="async">
+
+      <p>
+        L'annonce d'un firmware en source ouverte est devenue un argument de vente presque obligatoire
+        sur ce marché. Elle est souvent comprise de travers, y compris par des acheteurs avertis, et il
+        vaut la peine de préciser ce qu'elle apporte et ce qu'elle n'apporte pas.
+      </p>
+      <p>
+        Publier le code source prouve une chose : ce que le programme <em>est censé</em> faire est
+        vérifiable par quiconque. Cela ne prouve pas que le code publié est celui qui tourne dans
+        l'appareil que vous avez acheté. Rien n'empêche techniquement un constructeur de publier un code
+        irréprochable et d'expédier un binaire différent.
+      </p>
+      <p>
+        Le maillon qui manque s'appelle la <strong>compilation reproductible</strong> : garantir qu'en
+        recompilant le code publié, sur une machine quelconque, on obtient un binaire <em>strictement
+        identique</em>, octet pour octet, à celui distribué. C'est ce qui transforme une promesse en
+        vérification. Sans elle, l'ouverture du code est un geste de bonne volonté, pas une garantie.
+      </p>
+      <p>
+        Nous nous y engageons, et nous nous engageons aussi sur le mécanisme qui la rend utile côté
+        utilisateur : l'appareil doit pouvoir <em>attester</em> de l'empreinte du firmware qu'il exécute,
+        pour que vous puissiez la comparer à celle que vous avez recompilée. Le triptyque code publié,
+        compilation reproductible, attestation matérielle forme un ensemble dont aucun élément ne vaut
+        grand-chose isolément.
+      </p>
+      <p>
+        Il faut nommer les limites. La partie matérielle de PassPass restera propriétaire sur cette
+        première série — nous publierons les schémas si le projet atteint une taille qui le permet, mais
+        promettre aujourd'hui ce que nous ne pouvons pas tenir serait exactement le travers que nous
+        reprochons aux autres. Et l'élément sécurisé, même choisi pour son architecture ouverte, contient
+        du silicium que personne ne peut inspecter chez soi.
+      </p>
+      <p>
+        L'ouverture n'est pas une preuve d'absence de porte dérobée. C'est un déplacement du problème :
+        il ne s'agit plus de nous faire confiance, mais de rendre la tricherie détectable. C'est moins
+        séduisant qu'une garantie absolue, et beaucoup plus solide.
+      </p>
+      <p class="post-more">En amont : <a href="#element-securise">le choix de l'élément sécurisé</a>. En aval : <a href="#fabrication">la chaîne de fabrication</a>.</p>
+    </article>
+
+    <!-- ============ ARTICLE 10 ============ -->
+    <article class="post" id="recuperation">
+      <div class="post-meta">Conception · 7 min de lecture</div>
+      <h2>Perdre son boîtier : concevoir une récupération qui ne soit pas une porte dérobée</h2>
+
+      <img class="post-img" src="img/sauvegarde-recuperation-coffre-mot-de-passe-chiffre.svg" alt="Sauvegarde chiffrée et carte de récupération d'un coffre de mots de passe matériel" width="1200" height="630" loading="lazy" decoding="async">
+
+      <p>
+        C'est la question qui revient systématiquement, et c'est la bonne : que se passe-t-il si l'appareil
+        est perdu, volé, détruit ? Elle met le doigt sur la tension centrale de tout système de ce type.
+        Une récupération trop facile est une porte dérobée. Une récupération impossible fabrique des
+        utilisateurs qui perdent définitivement l'accès à leur vie numérique.
+      </p>
+      <p>
+        La mauvaise réponse, très répandue, consiste à conserver une copie de secours côté éditeur. Elle
+        règle le problème de l'utilisateur en recréant exactement celui que le produit prétend éliminer :
+        un tiers détient de quoi reconstituer votre coffre, donc une cible existe, donc une contrainte
+        légale peut s'exercer sur ce tiers. Nous ne ferons pas cela.
+      </p>
+      <p>
+        Notre approche repose sur deux éléments distincts, tous deux entre vos mains. Une
+        <strong>sauvegarde chiffrée</strong> que vous exportez où vous voulez — disque, clé USB, service
+        en ligne, peu importe puisqu'elle est inexploitable sans le second élément. Et une
+        <strong>carte de récupération</strong>, remise avec l'appareil, portant le secret qui permet de
+        déchiffrer cette sauvegarde sur un nouveau boîtier.
+      </p>
+      <p>
+        Conséquence à assumer : si vous perdez la carte <em>et</em> l'appareil, vos données sont perdues.
+        Définitivement. Nous ne pouvons rien faire, et cette impuissance est la contrepartie exacte de la
+        promesse que nous n'avons aucun accès à vos données. Un service qui peut vous dépanner dans cette
+        situation est un service qui pouvait déjà lire votre coffre.
+      </p>
+      <p>
+        Cela explique aussi le Pack Duo, qui n'est pas un artifice commercial : deux boîtiers synchronisés
+        constituent la meilleure protection contre la perte, bien supérieure à n'importe quelle sauvegarde,
+        parce qu'elle ne demande aucune discipline. Le second appareil se met à jour tout seul et dort
+        dans un tiroir.
+      </p>
+      <p>
+        Nous travaillons encore sur la forme physique de la carte. Le papier est fragile, le métal gravé
+        est coûteux, et un support trop discret finit par être jeté par erreur. C'est un problème de
+        conception plus difficile qu'il n'y paraît, et les suggestions sont les bienvenues.
+      </p>
+      <p class="post-more">Lié : <a href="#biometrie">le PIN de secours</a> et <a href="index.html#tarifs">le Pack Duo</a>.</p>
+    </article>
+
+    <!-- ============ ARTICLE 11 ============ -->
+    <article class="post" id="partage">
+      <div class="post-meta">Périmètre produit · 4 min de lecture</div>
+      <h2>Pourquoi nous ne ferons pas de partage familial</h2>
+
+      <img class="post-img" src="img/partage-familial-gestionnaire-mot-de-passe-perimetre.svg" alt="Partage familial de mots de passe : périmètre volontairement exclu d'un gestionnaire matériel" width="1200" height="630" loading="lazy" decoding="async">
+
+      <p>
+        C'est la fonction la plus demandée dès qu'on présente le produit, et la réponse est non. Pas
+        « pas tout de suite » : non, par construction.
+      </p>
+      <p>
+        Partager un mot de passe entre plusieurs personnes suppose un canal par lequel le secret circule,
+        et un mécanisme qui décide qui a le droit d'y accéder. Autrement dit un service, des comptes, une
+        infrastructure. Tout ce que PassPass n'a délibérément pas, et dont l'absence constitue la totalité
+        de son intérêt. Ajouter le partage reviendrait à reconstruire un gestionnaire en ligne autour d'un
+        boîtier, en cumulant les inconvénients des deux approches.
+      </p>
+      <p>
+        Ce n'est pas un problème que nous refusons de résoudre par paresse : c'est un problème que
+        1Password et Bitwarden résolvent très bien, avec des équipes et une infrastructure que nous
+        n'aurons pas. Un produit qui prétend tout faire finit par mal faire l'essentiel.
+      </p>
+      <p>
+        L'usage que nous recommandons, y compris s'il nous vend moins d'appareils : gardez votre
+        gestionnaire actuel pour les dizaines de comptes partagés et sans enjeu — les abonnements vidéo,
+        le compte de la cantine scolaire, les identifiants familiaux. Confiez au boîtier la poignée
+        d'accès dont la compromission serait grave : messagerie principale, banque, accès administrateur,
+        portefeuilles. Ces deux outils ne se concurrencent pas.
+      </p>
+      <p class="post-more">Le <a href="comparatif.html#verdict">verdict du comparatif</a> détaille quand rester sur un gestionnaire logiciel.</p>
+    </article>
+
+    <!-- ============ ARTICLE 12 ============ -->
+    <article class="post" id="passkeys">
+      <div class="post-meta">Prospective · 6 min de lecture</div>
+      <h2>Les passkeys vont-elles rendre ce produit inutile ?</h2>
+
+      <img class="post-img" src="img/passkeys-fido2-webauthn-avenir-mot-de-passe.svg" alt="Passkeys, FIDO2 et WebAuthn stockées hors du système d'exploitation sur une clé matérielle" width="1200" height="630" loading="lazy" decoding="async">
+
+      <p>
+        La question mérite d'être posée franchement, parce qu'elle porte sur la pertinence même du projet.
+        Apple, Google et Microsoft poussent activement les passkeys, une authentification sans mot de
+        passe fondée sur la cryptographie à clé publique. Si les mots de passe disparaissent, à quoi sert
+        un gestionnaire de mots de passe matériel ?
+      </p>
+      <p>
+        D'abord, un constat de calendrier. Les mots de passe ne disparaîtront pas dans cette décennie. Il
+        subsiste des dizaines de millions de sites, d'applications métier, d'équipements réseau,
+        d'interfaces d'administration et de systèmes anciens qui ne migreront jamais. Le secteur bancaire
+        et l'administration avancent lentement pour de bonnes raisons. Quiconque a maintenu un parc
+        informatique réel sait que la couche héritée ne meurt pas, elle s'accumule.
+      </p>
+      <p>
+        Ensuite, un point souvent négligé : <strong>une passkey est un secret comme un autre</strong>.
+        Elle doit être stockée, sauvegardée, synchronisée. Aujourd'hui, elle vit le plus souvent dans le
+        trousseau iCloud ou le gestionnaire de mots de passe Google — c'est-à-dire chez un tiers, sur un
+        appareil dont vous ne contrôlez pas entièrement le système. Le problème n'a pas disparu, il a
+        changé de nom.
+      </p>
+      <p>
+        PassPass est justement un endroit où stocker des passkeys hors du système d'exploitation, avec
+        validation physique à chaque usage. C'est pourquoi l'appareil implémente FIDO2 et WebAuthn dès la
+        première série : non pas comme une fonction annexe, mais parce que c'est probablement l'usage
+        dominant dans dix ans.
+      </p>
+      <p>
+        Notre lecture, qui peut se révéler fausse : le monde qui vient n'est pas « sans mot de passe »,
+        il est <em>mixte</em>, durablement. Passkeys sur les grands services, mots de passe partout
+        ailleurs, codes à usage unique en transition. Un appareil qui ne gérerait que l'un des trois
+        serait mal armé. Nous préférons parier sur la coexistence que sur la disparition annoncée.
+      </p>
+      <p class="post-more">À relire : <a href="#phishing">l'écran face à l'hameçonnage</a> et <a href="comparatif.html">le comparatif complet</a>.</p>
+    </article>
+
+    <div class="post-cta">
+      <p class="muted small">
+        Les prochaines notes porteront sur l'industrialisation : devis d'assemblage, arbitrage final sur
+        le boîtier et parcours de certification.
+      </p>
+      <a href="index.html#precommande" class="btn">Réserver un PassPass</a>
+    </div>
+
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-in">
+    <div>© <span id="year"></span> PassPass — Projet en développement.</div>
+    <div>
+      <a href="index.html">Accueil</a> ·
+      <a href="comparatif.html">Comparatif</a> ·
+      <a href="blog.html">Journal de bord</a> ·
+      <a href="legal.html">Informations légales</a> ·
+      <a href="en/index.html">🇬🇧 English</a> ·
+      <a href="mailto:contact@exemple.fr">contact@exemple.fr</a>
+    </div>
+  </div>
+  <div class="wrap foot-extra">
+    <div class="foot-logos">
+      <span>Campagne de précommandes bientôt sur</span>
+      <a href="index.html#precommande" title="Kickstarter"><img src="img/logos/kickstarter.svg" alt="" height="16">Kickstarter</a>
+      <a href="index.html#precommande" title="Ulule"><img src="img/logos/ulule.svg" alt="" height="16">Ulule</a>
+      <a href="index.html#precommande" title="Indiegogo"><img src="img/logos/indiegogo.svg" alt="Indiegogo" height="14"></a>
+      <a href="index.html#precommande" title="Crowd Supply"><img src="img/logos/crowdsupply.svg" alt="Crowd Supply" height="14"></a>
+    </div>
+    <span>Au journal de bord : <a href="blog.html#phishing">l'écran anti-phishing</a> · <a href="blog.html#element-securise">l'élément sécurisé ouvert</a> · <a href="blog.html#biometrie">ce que protège l'empreinte</a> · <a href="blog.html#recuperation">récupération sans porte dérobée</a></span>
+  </div>
+</footer>
+
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+
+</body>
+</html>

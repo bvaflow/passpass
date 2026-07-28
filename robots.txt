@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# Ressources techniques inutiles à l'indexation
+Disallow: /*.css$
+
+Sitemap: https://passpass.store/sitemap.xml

@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PassPass — Trình quản lý mật khẩu phần cứng có màn hình và cảm biến vân tay</title>
+<meta name="description" content="PassPass là trình quản lý mật khẩu phần cứng độc lập: vỏ nhôm gia công CNC, chuẩn IP67, màn hình memory-LCD luôn bật, xác thực vân tay ngay trên thiết bị và bắt buộc xác nhận vật lý. Hỗ trợ mật khẩu, passkey (FIDO2) và TOTP. Mua một lần, không phí thuê bao.">
+<link rel="canonical" href="https://passpass.store/vi/">
+<link rel="alternate" hreflang="en" href="https://passpass.store/en/">
+<link rel="alternate" hreflang="fr" href="https://passpass.store/">
+<link rel="alternate" hreflang="de" href="https://passpass.store/de/">
+<link rel="alternate" hreflang="es" href="https://passpass.store/es/">
+<link rel="alternate" hreflang="it" href="https://passpass.store/it/">
+<link rel="alternate" hreflang="pt" href="https://passpass.store/pt/">
+<link rel="alternate" hreflang="id" href="https://passpass.store/id/">
+<link rel="alternate" hreflang="tr" href="https://passpass.store/tr/">
+<link rel="alternate" hreflang="vi" href="https://passpass.store/vi/">
+<link rel="alternate" hreflang="ru" href="https://passpass.store/ru/">
+<link rel="alternate" hreflang="ja" href="https://passpass.store/ja/">
+<link rel="alternate" hreflang="zh-Hans" href="https://passpass.store/zh/">
+<link rel="alternate" hreflang="zh-Hant" href="https://passpass.store/zh-tw/">
+<link rel="alternate" hreflang="th" href="https://passpass.store/th/">
+<link rel="alternate" hreflang="ar" href="https://passpass.store/ar/">
+<link rel="alternate" hreflang="x-default" href="https://passpass.store/">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+
+<canvas id="matrix" class="matrix-bg" aria-hidden="true"></canvas>
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a href="index.html" class="logo"><span class="logo-mark">P</span> PassPass</a>
+    <nav class="nav-links">
+      <a href="#product">Sản phẩm</a>
+      <a href="#specs">Thông số</a>
+      <a href="#pricing">Giá</a>
+      <a href="#faq">FAQ</a>
+      <div class="lang">
+        <a class="lang-current" href="../index.html">🌐 VI ▾</a>
+        <div class="lang-menu">
+          <a href="../en/index.html">English</a>
+          <a href="../index.html">Français</a>
+          <a href="../de/index.html">Deutsch</a>
+          <a href="../es/index.html">Español</a>
+          <a href="../it/index.html">Italiano</a>
+          <a href="../pt/index.html">Português</a>
+          <a href="../id/index.html">Bahasa Indonesia</a>
+          <a href="../tr/index.html">Türkçe</a>
+          <a class="active">Tiếng Việt</a>
+          <a href="../ru/index.html">Русский</a>
+          <a href="../ja/index.html">日本語</a>
+          <a href="../zh/index.html">简体中文</a>
+          <a href="../zh-tw/index.html">繁體中文</a>
+          <a href="../th/index.html">ไทย</a>
+          <a href="../ar/index.html">العربية</a>
+        </div>
+      </div>
+      <a href="#reserve" class="btn">Đặt trước</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+
+    <span class="pill"><span class="dot"></span> Đang phát triển — đặt trước miễn phí, không thanh toán</span>
+    <h1>Mật khẩu của bạn không bao giờ rời khỏi túi áo.</h1>
+    <p class="lede">
+      PassPass là một két mật khẩu độc lập trong vỏ nhôm gia công CNC: màn hình luôn bật hiển thị
+      tên miền thật trước khi bất kỳ dữ liệu nào được gửi đi, vân tay được đối chiếu ngay trên
+      thiết bị, và một nút bấm vật lý mà không phần mềm độc hại nào có thể nhấn thay bạn. Hỗ trợ
+      mật khẩu, passkey (FIDO2) và TOTP — không cần tài khoản, không đám mây, không phí thuê bao.
+    </p>
+    <div class="hero-cta">
+      <a href="#reserve" class="btn">Đặt trước ngay — không thanh toán</a>
+      <a href="#pricing" class="btn ghost">Xem bảng giá</a>
+    </div>
+    <p class="hero-note">Mua một lần · hoạt động trên Windows, macOS, Linux, Android, iOS · firmware mã nguồn mở</p>
+    </div>
+
+    <div>
+      <div class="device-container">
+        <div class="device-aura"></div>
+
+        <!-- Le boîtier aluminium PassPass -->
+        <div class="device">
+          <div class="device-screws">
+            <div class="screw-row"><span class="screw"></span><span class="screw"></span></div>
+            <div class="screw-row"><span class="screw"></span><span class="screw"></span></div>
+          </div>
+
+          <div class="device-top-trim">
+            <span>A-6001 ALUMINIUM</span>
+            <span class="mic-hole"><span class="mic-dot"></span> MIC 🎙️</span>
+          </div>
+
+          <!-- Écran OLED tactile interactif -->
+          <div class="screen" id="proto-screen">
+            <div class="screen-top">
+              <div class="status-left"><span class="status-dot" id="os-dot"></span><span id="os-name">PassPass OS</span></div>
+              <div class="status-right"><span>100% 🔋</span><span>⚡ BT</span></div>
+            </div>
+
+            <!-- VUE 1 : MY VAULT (Le 2x2 Grid de la Photo 4) -->
+            <div class="os-view active" id="view-vault">
+              <div class="pixel-title">My Vault</div>
+              <div class="pixel-sub">31 passwords secured</div>
+              <div class="vault-grid">
+                <div class="vault-card card-passwords" onclick="openSubView('passwords')">
+                  <div class="vault-icon-circle">🔒</div>
+                  <span class="vault-card-label">Passwords</span>
+                  <div class="vault-card-line"></div>
+                </div>
+                <div class="vault-card card-add" onclick="openSubView('add')">
+                  <div class="vault-icon-circle">＋</div>
+                  <span class="vault-card-label">Add New</span>
+                  <div class="vault-card-line"></div>
+                </div>
+                <div class="vault-card card-fav" onclick="openSubView('favorites')">
+                  <div class="vault-icon-circle">❤️</div>
+                  <span class="vault-card-label">Favorites</span>
+                  <div class="vault-card-line"></div>
+                </div>
+                <div class="vault-card card-settings" onclick="openSubView('settings')">
+                  <div class="vault-icon-circle">⚙️</div>
+                  <span class="vault-card-label">Settings</span>
+                  <div class="vault-card-line"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- VUE 2 : BLUETOOTH REQUEST (Photo 2) -->
+            <div class="os-view bt-req-view" id="view-request">
+              <div class="bt-title">BLUETOOTH<br>REQUEST</div>
+              <div class="bt-desc">A device requests permission to type a password.</div>
+              <div class="bt-device-box">
+                <div>Site: <span>github.com</span></div>
+                <div>Account: <span>florian@example.com</span></div>
+                <div>Device: <span>MacBook Pro (00:FE:28)</span></div>
+              </div>
+              <div class="bt-btn-group">
+                <button class="btn-proto-accept" onclick="triggerBiometricAuth()">✓ ACCEPT (FINGERPRINT)</button>
+                <button class="btn-proto-reject" onclick="switchProtoView('vault')">✗ REJECT</button>
+              </div>
+            </div>
+
+            <!-- VUE 3 : VERROUILLÉ (Photo 3) -->
+            <div class="os-view lock-view-box" id="view-lock">
+              <div class="lock-circle">🔒</div>
+              <div class="pixel-title" style="font-size:2rem;margin-top:6px">PassPass One</div>
+              <div class="lock-sub">▸ TYPE PIN OR TOUCH SENSOR TO UNLOCK</div>
+            </div>
+
+            <!-- VUE 4 : SOUS-ÉCRAN DYNAMIQUE -->
+            <div class="os-view" id="view-sub">
+              <div class="sub-header">
+                <button class="btn-back" onclick="switchProtoView('vault')">◄ BACK</button>
+                <span id="sub-title-text" style="color:var(--accent-2);font-weight:600;font-size:0.82rem">Passwords (31)</span>
+              </div>
+              <div class="proto-list" id="sub-list-content">
+                <!-- Rempli en JS -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Lecteur biométrique au bas du boîtier -->
+          <div class="sensor-area">
+            <div class="sensor" id="sensor" role="button" tabindex="0" aria-label="Simulate fingerprint validation">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12 2a9 9 0 0 0-9 9v3"/><path d="M21 14v-3a9 9 0 0 0-4.5-7.8"/>
+                <path d="M7 14v-3a5 5 0 0 1 10 0v3a12 12 0 0 1-1.2 5.2"/>
+                <path d="M12 11v4a9 9 0 0 1-1.4 4.8"/><path d="M6.5 18.5A8 8 0 0 0 8 14"/>
+              </svg>
+            </div>
+            <div class="sensor-label" id="sensor-label">⚡ biometric sensor — click here</div>
+          </div>
+        </div>
+
+        <!-- Câble USB-C tressé relié -->
+        <div class="usb-cable-wrapper">
+          <div class="usb-plug"><div class="usb-led"></div></div>
+          <div class="usb-wire"></div>
+        </div>
+
+        <!-- Sélecteur de mode interactif pour tester les écrans du prototype -->
+        <div class="demo-controls-bar">
+          <div class="demo-label">🎮 Explore the live prototype:</div>
+          <div class="demo-tabs">
+            <button class="demo-tab active" id="tab-vault" onclick="switchProtoView('vault')">🏠 My Vault</button>
+            <button class="demo-tab" id="tab-request" onclick="switchProtoView('request')">📡 Bluetooth Request</button>
+            <button class="demo-tab" id="tab-lock" onclick="switchProtoView('lock')">🔒 Lock screen</button>
+            <button class="demo-tab" id="tab-settings" onclick="openSubView('settings')">⚙️ Hardware specs</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="product">
+  <div class="wrap">
+    <h2>Điều không nơi nào khác có</h2>
+    <div class="grid g3">
+      <div class="card">
+        <div class="ic">🖥️</div>
+        <h3>Màn hình xác minh</h3>
+        <p>Tên miền yêu cầu được hiển thị ngay trên màn hình luôn bật của thiết bị — một màn hình mà không kẻ tấn công nào kiểm soát được. Lừa đảo phishing chấm dứt tại đây.</p>
+      </div>
+      <div class="card">
+        <div class="ic">👆</div>
+        <h3>Vân tay xử lý ngay trên thiết bị</h3>
+        <p>Việc đối chiếu diễn ra hoàn toàn bên trong mô-đun cảm biến. Vân tay của bạn không bao giờ rời khỏi phần cứng.</p>
+      </div>
+      <div class="card">
+        <div class="ic">✋</div>
+        <h3>Bắt buộc xác nhận vật lý</h3>
+        <p>Không có gì được gõ, ký hay giải phóng nếu không có thao tác nhấn nút trong khi yêu cầu đang hiển thị trên màn hình. Một máy tính bị nhiễm mã độc không thể rút cạn két mật khẩu của bạn.</p>
+      </div>
+      <div class="card">
+        <div class="ic">🔌</div>
+        <h3>Hoạt động ở mọi nơi</h3>
+        <p>Với máy tính của bạn, đây là một bàn phím (USB-C hoặc Bluetooth) và một khóa bảo mật FIDO2 (USB + NFC). Không cần driver, không cần ứng dụng, không cần tài khoản.</p>
+      </div>
+      <div class="card">
+        <div class="ic">☁️</div>
+        <h3>Không đám mây theo mặc định</h3>
+        <p>2.000 mục, mã hóa AES-256-GCM, lưu trữ ngay trên thiết bị. Không có máy chủ nào của chúng tôi có thể bị xâm nhập — vì chúng tôi không có máy chủ nào cả.</p>
+      </div>
+      <div class="card">
+        <div class="ic">📖</div>
+        <h3>Firmware có thể kiểm chứng</h3>
+        <p>Mã nguồn mở, bản build có thể tái tạo (reproducible builds), chứng thực ngay trên thiết bị. Niềm tin phải được xác minh, chứ không phải xin được.</p>
+      </div>
+    </div>
+    <h2 style="margin-top:44px">Bốn giây, bốn bước</h2>
+    <p>Bạn vào một trang đăng nhập → thiết bị hiển thị yêu cầu và tên miền thật → bạn đặt ngón tay lên cảm biến → mật khẩu được gõ tự động. Đó là toàn bộ sản phẩm.</p>
+  </div>
+</section>
+
+<section id="specs">
+  <div class="wrap">
+    <h2>Thông số kỹ thuật</h2>
+    <ul>
+      <li><strong>Vỏ máy:</strong> nhôm gia công CNC, anod hóa cứng · chuẩn IP67 · 72 × 42 × 9 mm (titan grade 5 trên phiên bản giới hạn One Ti)</li>
+      <li><strong>Màn hình:</strong> memory LCD luôn bật, đọc rõ dưới ánh nắng</li>
+      <li><strong>Sinh trắc học:</strong> cảm biến vân tay điện dung, đối chiếu ngay trong mô-đun, mã PIN dự phòng có bộ đếm số lần thử bằng phần cứng</li>
+      <li><strong>Bảo mật:</strong> chip secure element chuyên dụng (kiến trúc mở, có thể kiểm chứng), két mã hóa AES-256-GCM, khởi động an toàn với firmware đã ký số</li>
+      <li><strong>Dung lượng:</strong> 2.000 mục · mật khẩu, passkey FIDO2/WebAuthn, TOTP, gõ tự động qua bàn phím HID</li>
+      <li><strong>Kết nối:</strong> USB-C · Bluetooth LE 5.3 (tắt theo mặc định) · NFC</li>
+      <li><strong>Pin:</strong> dùng được nhiều tuần cho mỗi lần sạc</li>
+      <li><strong>Khôi phục:</strong> bản sao lưu mã hóa được mở khóa bằng thẻ 12 từ do thiết bị tạo ra <em>cộng với</em> một cụm mật khẩu chỉ mình bạn biết — không có cửa hậu, theo đúng thiết kế</li>
+    </ul>
+  </div>
+</section>
+
+<section id="pricing">
+  <div class="wrap">
+    <h2 style="text-align:center">Thanh toán một lần. Chỉ vậy thôi.</h2>
+    <p class="lede" style="text-align:center;margin:0 auto 40px">
+      Không phí thuê bao, không gia hạn, không có gì bị ngắt nếu bạn ngừng trả tiền. Giá đặt sớm
+      bên dưới chỉ dành cho lô sản xuất đầu tiên.
+    </p>
+
+    <h3 class="tiers-title">PassPass One — nhôm anod hóa</h3>
+    <p class="tiers-sub">Phiên bản tiêu chuẩn: màn hình luôn bật, vân tay, chuẩn IP67.</p>
+    <div class="tiers">
+      <div class="tier">
+        <span class="tag">THANH TOÁN MỘT LẦN</span>
+        <img class="tier-img" src="../img/offre-passpass-one-aluminium.svg" alt="PassPass One in anodized aluminum" width="800" height="500" loading="lazy" decoding="async">
+        <h3>PassPass One</h3>
+        <div class="price">€249<s>€349</s><span class="off">−29%</span></div>
+        <p class="small muted">một lần · đã gồm VAT cho EU, chưa gồm phí vận chuyển<br>
+          <span class="ref">Đặt sớm — 200 lượt đặt trước đầu tiên, sau đó €299 · giá niêm yết: €349</span></p>
+        <ul>
+          <li>Vỏ nhôm anod hóa, màn hình luôn bật, chuẩn IP67</li>
+          <li>Cáp USB-C bện · thẻ khôi phục</li>
+          <li>Công cụ nhập dữ liệu cho mọi định dạng</li>
+          <li>Cập nhật firmware trọn đời</li>
+          <li>Bảo hành 2 năm, không phí thuê bao</li>
+        </ul>
+        <a href="#reserve" class="btn ghost wide" style="text-align:center">Đặt trước</a>
+      </div>
+      <div class="tier hl">
+        <span class="tag">PHỔ BIẾN NHẤT</span>
+        <img class="tier-img" src="../img/offre-bundle-classique-pochette-cuir-plaque-acier.svg" alt="Bundle: device, leather pouch and steel recovery plate" width="800" height="500" loading="lazy" decoding="async">
+        <h3>One + túi da &amp; tấm thép</h3>
+        <div class="price">€279<s>€389</s><span class="off">−28%</span></div>
+        <p class="small muted">một lần · đã gồm VAT cho EU, chưa gồm phí vận chuyển<br>
+          <span class="ref">Đặt sớm — 150 bộ đầu tiên, sau đó €329 · giá niêm yết: €389</span></p>
+        <ul>
+          <li>Trọn bộ PassPass One</li>
+          <li>Túi da đựng thiết bị</li>
+          <li>Tấm thép — khắc 12 từ khôi phục của bạn, chống cháy &amp; chống nước</li>
+          <li>Cáp USB-C bện · thẻ khôi phục</li>
+          <li>Bảo hành 2 năm, cập nhật trọn đời</li>
+        </ul>
+        <a href="#reserve" class="btn wide" style="text-align:center">Đặt trước bộ combo</a>
+      </div>
+      <div class="tier">
+        <span class="tag">THANH TOÁN MỘT LẦN</span>
+        <img class="tier-img" src="../img/offre-pack-duo-deux-boitiers.svg" alt="Duo pack: two devices and steel recovery plate" width="800" height="500" loading="lazy" decoding="async">
+        <h3>Duo Pack + tấm thép</h3>
+        <div class="price">€449<s>€649</s><span class="off">−31%</span></div>
+        <p class="small muted">một lần · hai thiết bị, một chính và một dự phòng<br>
+          <span class="ref">Đặt sớm — 100 bộ đầu tiên, sau đó €549 · giá niêm yết: €649</span></p>
+        <ul>
+          <li>Hai thiết bị PassPass One</li>
+          <li>Đồng bộ mã hóa giữa hai thiết bị</li>
+          <li>Tấm thép — khắc 12 từ khôi phục của bạn, chống cháy &amp; chống nước</li>
+          <li>Hai cáp USB-C</li>
+          <li>Bảo hành 2 năm, cập nhật trọn đời</li>
+        </ul>
+        <a href="#reserve" class="btn ghost wide" style="text-align:center">Đặt trước bộ đôi</a>
+      </div>
+    </div>
+
+    <h3 class="tiers-title">PassPass One Ti — phiên bản titan giới hạn</h3>
+    <p class="tiers-sub">Titan grade 5, mặt kính sapphire, đánh số phiên bản · linh kiện điện tử giống hệt bản tiêu chuẩn.</p>
+    <div class="tiers">
+      <div class="tier">
+        <span class="tag">PHIÊN BẢN GIỚI HẠN</span>
+        <img class="tier-img" src="../img/offre-passpass-one-ti-titane-saphir.svg" alt="PassPass One Ti, limited edition in titanium grade 5" width="800" height="500" loading="lazy" decoding="async">
+        <h3>One Ti</h3>
+        <div class="price">€349<s>€449</s><span class="off">−22%</span></div>
+        <p class="small muted">một lần · đã gồm VAT cho EU, chưa gồm phí vận chuyển<br>
+          <span class="ref">Đặt sớm — 100 chiếc đầu tiên, sau đó €399 · giá niêm yết: €449</span></p>
+        <ul>
+          <li>Titan grade 5, gia công nguyên khối</li>
+          <li>Mặt kính sapphire · đánh số phiên bản</li>
+          <li>Linh kiện điện tử và bảo mật giống hệt bản tiêu chuẩn</li>
+          <li>Cáp USB-C bện · thẻ khôi phục</li>
+          <li>Bảo hành 2 năm, cập nhật trọn đời</li>
+        </ul>
+        <a href="#reserve" class="btn ghost wide" style="text-align:center">Đặt trước bản Ti</a>
+      </div>
+      <div class="tier hl">
+        <span class="tag">PHIÊN BẢN GIỚI HẠN</span>
+        <img class="tier-img" src="../img/offre-bundle-ti-pochette-plaque.svg" alt="One Ti bundle: titanium device, leather pouch, steel plate" width="800" height="500" loading="lazy" decoding="async">
+        <h3>One Ti + túi da &amp; tấm thép</h3>
+        <div class="price">€379<s>€489</s><span class="off">−22%</span></div>
+        <p class="small muted">một lần · đã gồm VAT cho EU, chưa gồm phí vận chuyển<br>
+          <span class="ref">Đặt sớm — 75 bộ đầu tiên, sau đó €429 · giá niêm yết: €489</span></p>
+        <ul>
+          <li>Trọn bộ One Ti (titan + sapphire)</li>
+          <li>Túi da đựng thiết bị</li>
+          <li>Tấm thép — khắc 12 từ khôi phục của bạn, chống cháy &amp; chống nước</li>
+          <li>Cáp USB-C bện · thẻ khôi phục</li>
+          <li>Bảo hành 2 năm, cập nhật trọn đời</li>
+        </ul>
+        <a href="#reserve" class="btn wide" style="text-align:center">Đặt trước bộ combo Ti</a>
+      </div>
+      <div class="tier">
+        <span class="tag">PHIÊN BẢN GIỚI HẠN</span>
+        <img class="tier-img" src="../img/offre-pack-duo-ti-titane.svg" alt="Ti duo pack: two titanium devices and steel plate" width="800" height="500" loading="lazy" decoding="async">
+        <h3>Duo Pack Ti + tấm thép</h3>
+        <div class="price">€629<s>€899</s><span class="off">−30%</span></div>
+        <p class="small muted">một lần · hai thiết bị titan<br>
+          <span class="ref">Đặt sớm — 50 bộ đầu tiên, sau đó €719 · giá niêm yết: €899</span></p>
+        <ul>
+          <li>Hai thiết bị One Ti (titan + sapphire)</li>
+          <li>Đồng bộ mã hóa giữa hai thiết bị</li>
+          <li>Tấm thép — khắc 12 từ khôi phục của bạn, chống cháy &amp; chống nước</li>
+          <li>Hai cáp USB-C</li>
+          <li>Bảo hành 2 năm, cập nhật trọn đời</li>
+        </ul>
+        <a href="#reserve" class="btn ghost wide" style="text-align:center">Đặt trước bộ đôi Ti</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap" style="max-width:860px">
+    <h2>Câu hỏi thường gặp</h2>
+
+    <details>
+      <summary>Nếu tôi làm mất thiết bị thì sao?</summary>
+      <p>Két mật khẩu được mã hóa và không thể sử dụng nếu thiếu vân tay của bạn. Bạn khôi phục lên
+    một thiết bị mới từ bản sao lưu đã mã hóa, được mở khóa bằng thẻ khôi phục 12 từ đi kèm
+    <em>cộng với</em> cụm mật khẩu cá nhân của bạn. Nếu thiếu một trong hai, không ai — kể cả
+    chúng tôi — có thể đọc được dữ liệu của bạn.</p>
+    </details>
+
+    <details>
+      <summary>Cụm mật khẩu (passphrase) là gì, và nếu tôi quên thì sao?</summary>
+      <p>Cụm mật khẩu là một mật khẩu dài do bạn tự chọn và ghi nhớ ngay từ lần thiết lập đầu tiên.
+    Nó bổ sung cho thẻ 12 từ do thiết bị tạo ra: thẻ là thứ bạn <em>có</em>, cụm mật khẩu là thứ
+    bạn <em>biết</em> — cần cả hai để khôi phục bản sao lưu, nên chỉ đánh cắp được thẻ thôi thì
+    vô dụng. Sự đánh đổi này là có chủ đích: nếu bạn quên cụm mật khẩu, bản sao lưu của bạn sẽ
+    vĩnh viễn không thể đọc được — không có cách nào vượt qua, dù là với chúng tôi hay bất kỳ ai
+    khác. Hãy chọn một cụm từ dài nhưng dễ nhớ (thiết bị sẽ yêu cầu bạn xác nhận lại trong quá
+    trình đăng ký), và không bao giờ lưu nó ở cùng nơi với thẻ.</p>
+    </details>
+
+    <details>
+      <summary>Vân tay của tôi có được gửi đi đâu không?</summary>
+      <p>Không. Việc đối chiếu diễn ra hoàn toàn bên trong mô-đun cảm biến. Vân tay không bao giờ
+    rời khỏi con chip, và cũng không có máy chủ nào để nó có thể được gửi tới.</p>
+    </details>
+
+    <details>
+      <summary>Có cần ứng dụng hay phí thuê bao không?</summary>
+      <p>Không. Thiết bị hoạt động như một bàn phím và một khóa FIDO2 — nó chạy được trên bất kỳ
+    máy tính hay điện thoại nào mà không cần phần mềm. Có một ứng dụng đồng hành miễn phí chỉ
+    để tiện dụng hơn: nhập dữ liệu ngoại tuyến, sao lưu, cập nhật. Bạn chỉ trả tiền một lần;
+    nếu ngày mai chúng tôi biến mất, thiết bị của bạn vẫn tiếp tục hoạt động.</p>
+    </details>
+
+    <details>
+      <summary>Khi nào thì giao hàng?</summary>
+      <p>PassPass được bán theo hình thức đặt trước: quá trình sản xuất bắt đầu khi đợt đặt trước
+    kết thúc, và sản phẩm chỉ được giao sau khi đã sản xuất và kiểm thử xong. Các mốc thời gian
+    nêu ra là ước tính thiện chí, sẽ được cập nhật công khai. Đặt trước hôm nay hoàn toàn miễn
+    phí và không yêu cầu thanh toán.</p>
+    </details>
+  </div>
+</section>
+
+<section id="reserve">
+  <div class="wrap">
+    <h2 style="text-align:center">Đặt trước PassPass của bạn</h2>
+    <p class="lede" style="text-align:center;margin:0 auto 36px">
+      Không thanh toán ngay bây giờ. Chúng tôi sẽ liên hệ với bạn ngay khi việc sản xuất được xác nhận.
+    </p>
+    <div class="form-box">
+      <form id="preorder" novalidate>
+        <label for="email">Địa chỉ email</label>
+        <input type="email" id="email" name="email" placeholder="ban@vidu.vn" autocomplete="email" required>
+        <label for="pack">Tùy chọn bạn muốn</label>
+        <select id="pack" name="pack">
+          <option value="one">PassPass One — €249</option>
+          <option value="one-bundle">One + túi da &amp; tấm thép — €279</option>
+          <option value="duo">Duo Pack + tấm thép — €449</option>
+          <option value="ti">One Ti (giới hạn) — €349</option>
+          <option value="ti-bundle">One Ti + túi da &amp; tấm thép — €379</option>
+          <option value="ti-duo">Duo Pack Ti + tấm thép — €629</option>
+          <option value="undecided">Chưa chắc chắn</option>
+        </select>
+        <div class="check">
+          <input type="checkbox" id="consent" required>
+          <label for="consent">Tôi đồng ý được liên hệ về việc đặt trước này. Địa chỉ email của tôi chỉ
+          được dùng cho mục đích đó — không bao giờ bán hay chia sẻ.</label>
+        </div>
+        <button type="submit" class="btn wide">Xác nhận đặt trước của tôi</button>
+        <div class="msg" id="formMsg" role="status" aria-live="polite"></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-in">
+    <div>© <span id="year"></span> PassPass — Sản phẩm đang trong quá trình phát triển.</div>
+    <div>
+      <a href="#reserve">Đặt trước</a> ·
+      <a href="../comparatif.html">So sánh (FR)</a> ·
+      <a href="../blog.html">Nhật ký kỹ thuật (FR)</a> ·
+      <a href="../legal.html">Pháp lý (FR)</a> ·
+      <a href="../index.html">🇫🇷 Français</a>
+    </div>
+  </div>
+  <div class="wrap foot-extra">
+    <div class="foot-logos">
+      <span>Chiến dịch đặt trước sắp ra mắt trên</span>
+      <a href="#reserve" title="Kickstarter"><img src="../img/logos/kickstarter.svg" alt="" height="16">Kickstarter</a>
+      <a href="#reserve" title="Ulule"><img src="../img/logos/ulule.svg" alt="" height="16">Ulule</a>
+      <a href="#reserve" title="Indiegogo"><img src="../img/logos/indiegogo.svg" alt="Indiegogo" height="14"></a>
+      <a href="#reserve" title="Crowd Supply"><img src="../img/logos/crowdsupply.svg" alt="Crowd Supply" height="14"></a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+  (function(){
+    const form = document.getElementById('preorder');
+    const msg  = document.getElementById('formMsg');
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      const email   = document.getElementById('email').value.trim();
+      const consent = document.getElementById('consent').checked;
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+        msg.className = 'msg err';
+        msg.textContent = 'Vui lòng nhập địa chỉ email hợp lệ.';
+        return;
+      }
+      if (!consent) {
+        msg.className = 'msg err';
+        msg.textContent = 'Vui lòng đánh dấu vào ô đồng ý.';
+        return;
+      }
+      msg.className = 'msg ok';
+      msg.textContent = 'Đã ghi nhận đặt trước của bạn. Email xác nhận sẽ được gửi tới sau — không có khoản thanh toán nào được thực hiện.';
+      form.querySelector('button[type=submit]').disabled = true;
+    });
+  })();
+</script>
+
+<script>
+  /* --- Démo interactive du Prototype Titan OS --- */
+  let currentProtoView = 'vault';
+  const sensor = document.getElementById('sensor');
+  const sensorLabel = document.getElementById('sensor-label');
+  const osDot = document.getElementById('os-dot');
+
+  window.switchProtoView = function(viewName) {
+    currentProtoView = viewName;
+    document.querySelectorAll('.os-view').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.demo-tab').forEach(el => el.classList.remove('active'));
+
+    const targetView = document.getElementById('view-' + (viewName === 'sub' ? 'sub' : viewName));
+    if (targetView) targetView.classList.add('active');
+
+    const tabEl = document.getElementById('tab-' + viewName);
+    if (tabEl) tabEl.classList.add('active');
+
+    if (viewName === 'lock') {
+      osDot.style.background = '#fbbf24';
+      osDot.style.boxShadow = '0 0 8px #fbbf24';
+      sensorLabel.textContent = '🔒 device locked — press the sensor';
+    } else {
+      osDot.style.background = '#4ade80';
+      osDot.style.boxShadow = '0 0 8px #4ade80';
+      sensorLabel.textContent = '⚡ biometric sensor ready — click here';
+    }
+  };
+
+  window.openSubView = function(type) {
+    document.querySelectorAll('.os-view').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.demo-tab').forEach(el => el.classList.remove('active'));
+    document.getElementById('view-sub').classList.add('active');
+
+    const titleEl = document.getElementById('sub-title-text');
+    const listEl = document.getElementById('sub-list-content');
+    listEl.innerHTML = '';
+
+    if (type === 'passwords') {
+      titleEl.textContent = '🔐 Vault Passwords (31)';
+      const items = [
+        ['github.com', 'florian@example.com'],
+        ['national-bank.com', 'Checking account ••• 2841'],
+        ['mail.proton.me', 'florian.pro'],
+        ['aws.amazon.com', 'root-sec@wascale.com']
+      ];
+      items.forEach(([domain, user]) => {
+        const div = document.createElement('div');
+        div.className = 'proto-item';
+        div.innerHTML = `<div><span class="domain">${domain}</span><br><span class="user">${user}</span></div><span style="color:var(--accent-2);font-size:1.1rem">👆</span>`;
+        div.onclick = () => switchProtoView('request');
+        listEl.appendChild(div);
+      });
+    } else if (type === 'add') {
+      titleEl.textContent = '➕ Add a secret';
+      listEl.innerHTML = `
+        <div style="padding:12px;text-align:center;color:var(--accent);font-size:0.85rem;">
+          <div style="font-size:2rem;margin-bottom:8px">📡 USB / BT Ready</div>
+          <p style="margin:0;color:var(--txt-2);font-size:0.75rem">Open your password manager or browser on PC/Mac. The device automatically captures the new encrypted entry.</p>
+        </div>
+      `;
+    } else if (type === 'favorites') {
+      titleEl.textContent = '❤️ Quick favorites';
+      const items = [
+        ['github.com', 'Priority access'],
+        ['terminal.wascale.io', 'SSH Key Ed25519']
+      ];
+      items.forEach(([domain, user]) => {
+        const div = document.createElement('div');
+        div.className = 'proto-item';
+        div.innerHTML = `<div><span class="domain">${domain}</span><br><span class="user">${user}</span></div><span style="color:#f472b6">★</span>`;
+        div.onclick = () => triggerBiometricAuth();
+        listEl.appendChild(div);
+      });
+    } else if (type === 'settings') {
+      titleEl.textContent = '⚙️ System & Security';
+      const specTab = document.getElementById('tab-settings');
+      if (specTab) specTab.classList.add('active');
+      listEl.innerHTML = `
+        <div class="proto-item"><span>Chassis</span><span class="domain" style="color:var(--accent-2)">Aluminum A-6001 (IP67)</span></div>
+        <div class="proto-item"><span>Secure Element</span><span class="domain" style="color:var(--accent)">EAL6+ certified</span></div>
+        <div class="proto-item"><span>Bluetooth LE</span><span class="domain">Active (AES-256 encrypted)</span></div>
+        <div class="proto-item"><span>Firmware</span><span class="domain" style="color:#a855f7">v1.0.4 Reproducible</span></div>
+      `;
+    }
+  };
+
+  window.triggerBiometricAuth = function() {
+    sensor.classList.add('ok');
+    sensorLabel.textContent = '✓ Fingerprint validated by the Secure Element';
+    osDot.style.background = '#4ade80';
+
+    // Si on est dans bluetooth request, montrer la confirmation
+    if (currentProtoView === 'request' || currentProtoView === 'lock') {
+      const reqView = document.getElementById('view-request');
+      reqView.innerHTML = `
+        <div style="padding:30px 10px;text-align:center;color:var(--accent);">
+          <div style="font-size:2.5rem;margin-bottom:10px">✓</div>
+          <div class="pixel-title" style="color:var(--accent);font-size:1.6rem">PASSWORD<br>TRANSFERRED!</div>
+          <p style="color:var(--txt-2);font-size:0.75rem;margin-top:8px">USB/BT auto-type completed.<br>Immediate re-lock.</p>
+        </div>
+      `;
+      setTimeout(() => {
+        // Restaurer la vue request pour la prochaine fois
+        reqView.innerHTML = `
+          <div class="bt-title">BLUETOOTH<br>REQUEST</div>
+          <div class="bt-desc">A device requests permission to type a password.</div>
+          <div class="bt-device-box">
+            <div>Site: <span>github.com</span></div>
+            <div>Account: <span>florian@example.com</span></div>
+            <div>Device: <span>MacBook Pro (00:FE:28)</span></div>
+          </div>
+          <div class="bt-btn-group">
+            <button class="btn-proto-accept" onclick="triggerBiometricAuth()">✓ ACCEPT (FINGERPRINT)</button>
+            <button class="btn-proto-reject" onclick="switchProtoView('vault')">✗ REJECT</button>
+          </div>
+        `;
+        sensor.classList.remove('ok');
+        sensorLabel.textContent = '⚡ biometric sensor — click here';
+        switchProtoView('vault');
+      }, 2000);
+    } else {
+      setTimeout(() => {
+        sensor.classList.remove('ok');
+        sensorLabel.textContent = '⚡ biometric sensor ready — click here';
+        if (currentProtoView === 'lock') switchProtoView('vault');
+      }, 1500);
+    }
+  };
+
+  sensor.addEventListener('click', () => {
+    if (currentProtoView === 'lock') {
+      triggerBiometricAuth();
+      setTimeout(() => switchProtoView('vault'), 400);
+    } else if (currentProtoView === 'request') {
+      triggerBiometricAuth();
+    } else {
+      triggerBiometricAuth();
+      switchProtoView('request');
+    }
+  });
+  sensor.addEventListener('keydown', function(e){
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); sensor.click(); }
+  });
+</script>
+
+<script>
+/* ---------- Pluie Matrix discrète sur le hero ---------- */
+(function(){
+  var cv = document.getElementById('matrix');
+  if (!cv) return;
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var ctx = cv.getContext('2d'),
+      GLYPHS = 'ABCDEF0123456789$#@&%*+=<>/\\|{}[]§µ',
+      SIZE = 15,
+      cols = 0, drops = [], speeds = [], dpr = 1, raf = null, last = 0;
+
+  function vw(){ return window.innerWidth; }
+  function vh(){ return window.innerHeight; }
+
+  function resize(){
+    dpr = Math.min(window.devicePixelRatio || 1, 2);
+    var w = vw(), h = vh();
+    cv.width  = w * dpr;
+    cv.height = h * dpr;
+    cv.style.width  = w + 'px';
+    cv.style.height = h + 'px';
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    cols = Math.ceil(w / SIZE);
+    drops = []; speeds = [];
+    for (var i = 0; i < cols; i++){
+      drops[i]  = Math.random() * -h / SIZE;      // départ échelonné hors écran
+      speeds[i] = 0.35 + Math.random() * 0.55;    // vitesses variées
+    }
+    ctx.clearRect(0, 0, w, h);
+  }
+
+  function draw(ts){
+    raf = requestAnimationFrame(draw);
+    if (ts - last < 55) return;                   // ~18 images/s, suffisant et sobre
+    last = ts;
+
+    var w = vw(), h = vh();
+
+    // voile sombre : laisse une traînée derrière chaque glyphe
+    ctx.fillStyle = 'rgba(10,12,16,0.09)';
+    ctx.fillRect(0, 0, w, h);
+
+    ctx.font = SIZE + 'px ui-monospace, SFMono-Regular, Menlo, monospace';
+    ctx.textBaseline = 'top';
+
+    for (var i = 0; i < cols; i++){
+      var ch = GLYPHS.charAt((Math.random() * GLYPHS.length) | 0),
+          x  = i * SIZE,
+          y  = drops[i] * SIZE;
+
+      // tête de colonne plus claire, corps vert sombre
+      ctx.fillStyle = Math.random() > 0.94 ? 'rgba(180,255,214,0.85)' : 'rgba(74,222,128,0.55)';
+      ctx.fillText(ch, x, y);
+
+      if (y > h && Math.random() > 0.975) drops[i] = 0;
+      drops[i] += speeds[i];
+    }
+  }
+
+  function start(){ if (!raf) { last = 0; raf = requestAnimationFrame(draw); } }
+  function stop(){ if (raf) { cancelAnimationFrame(raf); raf = null; } }
+
+  resize();
+  start();
+
+  var t;
+  window.addEventListener('resize', function(){
+    clearTimeout(t);
+    t = setTimeout(function(){ resize(); }, 180);
+  });
+
+  // ne tourne pas dans un onglet en arrière-plan
+  document.addEventListener('visibilitychange', function(){
+    document.hidden ? stop() : start();
+  });
+})();
+</script>
+
+</body>
+</html>
